@@ -1,0 +1,30 @@
+# ──────────────────────────────────────────────
+#  BuiltOnResults — .gitignore
+#  Règle : données sensibles / PII → Google Drive, JAMAIS versionnées.
+# ──────────────────────────────────────────────
+
+# ── PII / données sensibles (prospects, leads) → Drive ──
+outreach/
+prospects_*.csv
+*.jsonl
+
+# ── Secrets (défensif — vivent normalement hors dossier ~/.bor_*) ──
+.env
+.env.*
+*.pem
+*.key
+.bor_*
+
+# ── Caches / bytecode / logs ──
+.serp_cache/
+__pycache__/
+*.pyc
+*.log
+daemon.log
+
+# ── Screenshots de review (transitoires) → Drive si besoin ──
+mobile_review_screenshots/
+
+# ── Artefacts de déploiement ──
+out/
+builtonresults-prod/

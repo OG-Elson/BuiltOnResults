@@ -1,0 +1,36 @@
+Build a modern, high-converting ONE-PAGE marketing website for a professional CLEANING SERVICES company in Mombasa, Kenya (residential + commercial). Static, single page, minimal client-side JS. Mobile-first. Goal: eye-catching, trustworthy, conversion-focused.
+
+DESIGN / AESTHETIC:
+- Clean & fresh palette conveying cleanliness and trust: deep teal/blue + bright aqua-green accent + lots of white space. Warm high-contrast accent color for CTA buttons.
+- Modern sans-serif typography, bold large headings, generous spacing, rounded cards, soft shadows, subtle hover states.
+- High-quality imagery placeholders: sparkling clean home/office, professional cleaners in uniform, before/after shots. Use royalty-free placeholder images.
+- Strong visual hierarchy, big bold hero. Accessible (alt text, good contrast).
+
+SECTIONS (in order):
+1. Sticky header: logo "[Company Name]" + nav (Services, Areas, Why Us, Reviews, Contact) + a phone number + a prominent "Get a Free Quote" button + a WhatsApp icon button.
+2. HERO: H1 "Professional Cleaning Services in Mombasa" + subheadline ("Trusted residential & commercial cleaning across Mombasa — insured, vetted, and satisfaction guaranteed."). Two CTAs: "Get a Free Quote" and "Chat on WhatsApp". Hero image. A row of trust badges: Fully Insured, Vetted Staff, Eco-Friendly Products, 100% Satisfaction Guarantee.
+3. Trust stat bar: "500+ homes cleaned, 5-star rated, Same-day available, Locally owned in Mombasa".
+4. SERVICES grid (icon cards): Home/Residential Cleaning, Office/Commercial Cleaning, Deep Cleaning, Move-In/Move-Out Cleaning, Carpet & Upholstery Cleaning, Sofa & Mattress Cleaning, Post-Construction Cleaning, Fumigation & Pest Control. Each with a short benefit line.
+5. WHY CHOOSE US: vetted & background-checked staff, fully insured, eco-friendly products, satisfaction guarantee (free re-clean if not happy), flexible scheduling, transparent pricing, M-Pesa accepted.
+6. HOW IT WORKS (3 steps): 1) Request a free quote (call, WhatsApp, or form) -> 2) Pick a time that suits you -> 3) Relax, our team makes it spotless.
+7. BEFORE / AFTER gallery (image pairs).
+8. SERVICE AREAS in Mombasa: Nyali, Bamburi, Mtwapa, Shanzu, Tudor, Kizingo, Mombasa Island, Likoni, Diani (nearby). Displayed as tags on a simple map-style section.
+9. TESTIMONIALS: 3-4 review cards with 5-star ratings, customer name + neighborhood.
+10. PRICING / QUOTE: "Transparent pricing - request a custom quote in 2 minutes." Emphasize free quote.
+11. Strong CTA band: "Ready for a spotless home or office? Get your free quote today."
+12. CONTACT / QUOTE FORM: fields = Name, Phone/WhatsApp, Service type (dropdown), Preferred date, Message. Big WhatsApp click-to-chat button + click-to-call button next to it (Kenya is WhatsApp-first).
+13. FAQ (accordion): Do you bring your own supplies? Are your cleaners insured & vetted? Which areas do you cover? How much does it cost? Do you offer same-day cleaning? Do you accept M-Pesa?
+14. Footer: contact, working hours, service areas, social links, WhatsApp, copyright.
+
+CONVERSION:
+- WhatsApp click-to-chat and click-to-call available in header, hero, CTA band, and footer (one tap).
+- Free-quote form reachable from every CTA. Repeat CTAs down the page.
+
+TECHNICAL / SEO:
+- Semantic HTML5, single <h1> containing "Cleaning Services in Mombasa", logical h2/h3 hierarchy.
+- SEO meta title and description including the keyword.
+- Include JSON-LD structured data for LocalBusiness / CleaningService (name, area served: Mombasa, services, phone).
+- Fast, lightweight, mobile-first, image alt text everywhere.
+- Keep it a single static page with minimal JavaScript (no heavy framework features) so it exports cleanly to plain HTML.
+
+TONE: professional, trustworthy, local, benefit-driven. Placeholder brand name "[Company Name]".

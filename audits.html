@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Consultant Dashboard — BuiltOnResults</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<style>
+:root{--cream:#F7F4EC;--paper:#FBF9F3;--ink:#171512;--muted:#6d675e;--line:rgba(23,21,18,.12);--green:#16a34a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;padding:1.4rem}
+.wrap{max-width:900px;margin:0 auto}
+h1{font-family:Georgia,serif;font-size:1.5rem;margin-bottom:.2rem;display:flex;align-items:center;gap:.6rem}
+h1 img{height:34px}
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:1.4rem}
+.gate{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.2rem;max-width:420px}
+.gate input{width:100%;font-size:16px;padding:.6rem .8rem;border:1px solid var(--line);border-radius:8px;margin:.5rem 0}
+.btn{background:var(--ink);color:#fff;border:none;border-radius:8px;padding:.6rem 1.2rem;font-weight:600;cursor:pointer;font-size:.85rem}
+.btn.o{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.msg{font-size:.8rem;color:#dc2626;margin-top:.5rem;min-height:1em}
+.bar{display:flex;gap:.6rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+.bar input{flex:1;min-width:180px;font-size:16px;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px}
+.count{font-size:.8rem;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:1rem}
+.chead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.who{font-weight:700;font-size:1rem}
+.who small{font-weight:400;color:var(--muted);font-size:.8rem}
+.meta{font-size:.78rem;color:var(--muted);margin:.35rem 0 .6rem}
+.badge{display:inline-block;font-size:.66rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;background:rgba(23,21,18,.06);white-space:nowrap}
+.badge.pos{background:rgba(220,38,38,.08);color:#b91c1c}
+.badge.ok{background:rgba(22,163,74,.1);color:#15803d}
+.brief{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.85rem;margin-top:.5rem}
+.brief h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:.7rem 0 .3rem}
+.brief h4:first-child{margin-top:0}
+.brief ul{margin:0 0 0 1.1rem;font-size:.85rem}
+.brief li{margin-bottom:.2rem}
+.brief .prio li{font-weight:600}
+details{margin-top:.6rem}
+summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--muted)}
+.deliv{font-size:.82rem;margin-top:.5rem}
+.deliv code{display:block;background:rgba(23,21,18,.05);border:1px solid var(--line);border-radius:6px;padding:.4rem .6rem;margin:.2rem 0;font-family:ui-monospace,monospace;font-size:.76rem;white-space:pre-wrap;word-break:break-word}
+.deliv .lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:.6rem}
+.empty{color:var(--muted);font-size:.9rem;padding:2rem 0;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1><img src="logo-br.png" alt="BuiltOnResults"> Consultant Dashboard</h1>
+<div class="sub">Prépa d'appel — clients & briefs. Privé, non indexé.</div>
+
+<div class="gate" id="gate">
+<div style="font-weight:600;font-size:.9rem">Code admin</div>
+<input type="password" id="adminCode" placeholder="Entre ton code admin" autocomplete="off">
+<button class="btn" onclick="load()">Charger</button>
+<div class="msg" id="gateMsg"></div>
+</div>
+
+<div id="app" style="display:none">
+<div class="bar">
+<input type="text" id="filter" placeholder="Filtrer (nom, email, URL, mot-clé…)" oninput="draw()">
+<span class="count" id="count"></span>
+<button class="btn o" onclick="load()">↻ Rafraîchir</button>
+<button class="btn o" onclick="logout()">Quitter</button>
+</div>
+<div id="briefsPanel"></div>
+<div id="leadsPanel"></div>
+<div id="list"></div>
+</div>
+</div>
+
+<script>
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let AUDITS=[],LEADS=[],BRIEFS=[];
+function logout(){localStorage.removeItem('borAdmin');location.reload();}
+async function load(){
+const code=(document.getElementById('adminCode')?.value||localStorage.getItem('borAdmin')||'').trim();
+const gm=document.getElementById('gateMsg');
+if(!code){if(gm)gm.textContent='Entre ton code.';return;}
+if(gm)gm.textContent='Chargement…';
+try{
+const r=await fetch('/flyer/api/search?fn=admin&code='+encodeURIComponent(code));
+const d=await r.json();
+if(!d.ok){if(gm)gm.textContent='Code invalide.';return;}
+localStorage.setItem('borAdmin',code);
+AUDITS=d.audits||[];LEADS=d.leads||[];BRIEFS=d.briefs||[];
+document.getElementById('gate').style.display='none';
+document.getElementById('app').style.display='';
+draw();
+}catch(e){if(gm)gm.textContent='Erreur réseau.';}
+}
+function list(items){return (items||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li style="color:#999">—</li>';}
+async function briefAction(id,token,action){
+if(!confirm(action+' this brief? An email will be sent to the client.'))return;
+try{
+const r=await fetch('/flyer/api/search?fn=qualify_brief&id='+encodeURIComponent(id)+'&token='+encodeURIComponent(token)+'&action='+action,{headers:{'Accept':'application/json'}});
+const d=await r.json();
+if(d.ok){load();}else{alert('Failed: '+(d.reason||'error'));}
+}catch(e){alert('Network error');}
+}
+function drawBriefs(){
+var bp=document.getElementById('briefsPanel');if(!bp)return;
+if(!BRIEFS.length){bp.innerHTML='';return;}
+var sf=(document.getElementById('briefFilter')||{}).value||'new';
+var rows=BRIEFS.filter(function(b){return sf==='all'||(b.status||'new')===sf;});
+var nn=BRIEFS.filter(function(b){return (b.status||'new')==='new';}).length;
+bp.innerHTML='<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem"><b>📩 '+BRIEFS.length+' briefs projet'+(nn?' ('+nn+' new)':'')+'</b><select id="briefFilter" onchange="drawBriefs()" style="font-size:14px;padding:.3rem .5rem;border:1px solid var(--line);border-radius:8px">'+['new','qualified','declined','booked','all'].map(function(s){return '<option value="'+s+'"'+(s===sf?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div>'+
+(rows.length?rows.map(function(b){
+var st=b.status||'new';
+var act=st==='new'?('<button class="btn" style="background:#16a34a;padding:.35rem .8rem;font-size:.75rem;margin-right:.4rem" onclick="briefAction(\''+esc(b.id)+'\',\''+esc(b.token)+'\',\'qualify\')">✓ Qualify</button><button class="btn o" style="padding:.35rem .8rem;font-size:.75rem" onclick="briefAction(\''+esc(b.id)+'\',\''+esc(b.token)+'\',\'decline\')">✕ Decline</button>'):'';
+return '<div style="padding:.7rem 0;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap"><b>'+esc(b.name)+'</b> <span class="badge'+(st==='qualified'?' ok':st==='new'?' pos':'')+'">'+esc(st)+'</span></div><div style="color:var(--muted);font-size:.8rem;margin:.2rem 0">'+esc(b.email)+' · '+esc(b.project_type)+' · '+esc(b.budget)+' · '+esc(b.timeline)+' · '+esc(b.ts)+'</div><div style="font-size:.85rem">'+esc(b.description)+'</div>'+(act?'<div style="margin-top:.5rem">'+act+'</div>':'')+'</div>';
+}).join(''):'<div style="color:var(--muted);font-size:.85rem;padding:.5rem 0">Aucun brief « '+sf+' ».</div>')+'</div>';
+}
+function draw(){
+const f=(document.getElementById('filter').value||'').toLowerCase();
+const rows=AUDITS.filter(a=>!f||JSON.stringify(a).toLowerCase().includes(f));
+document.getElementById('count').textContent=rows.length+' / '+AUDITS.length+' audits';
+var lp=document.getElementById('leadsPanel');
+if(LEADS.length){lp.innerHTML='<div class="card" style="padding:.8rem 1.1rem"><details><summary>📧 '+LEADS.length+' leads (non-acheteurs) — emails captur\u00e9s</summary><div class="deliv">'+LEADS.map(function(l){return '<div style="padding:.3rem 0;border-bottom:1px solid var(--line)"><b>'+esc(l.email)+'</b> <span style="color:var(--muted);font-size:.78rem">'+esc(l.ts||'')+' \u00b7 '+esc(l.url||'')+' \u00b7 \ud83d\udd11 '+esc(l.keyword||'')+'</span></div>';}).join('')+'</div></details></div>';}else{lp.innerHTML='';}
+drawBriefs();
+if(!rows.length){document.getElementById('list').innerHTML='<div class="empty">Aucun audit.</div>';return;}
+document.getElementById('list').innerHTML=rows.map(a=>{
+const an=a.analysis||{},b=an.consultant_brief||{};
+return `<div class="card">
+<div class="chead">
+<div><div class="who">${esc(a.name||'—')} <small>${esc(a.email||'')}</small></div>
+<div class="meta">🔗 ${esc(a.url||'')} · 🔑 ${esc(a.keyword||'')} · ${esc(a.sector||'')}</div></div>
+<div style="text-align:right"><span class="badge pos">#${esc(a.position||'?')}</span>
+<span class="badge ${a.crawled?'ok':''}">${a.crawled?'✓ crawled':'no crawl'}</span>
+<div class="meta" style="margin:.3rem 0 0">${esc(a.ts||'')}</div></div>
+</div>
+<div class="brief">
+<h4>🎯 Priorités à traiter (appel)</h4><ul class="prio">${list(b.priorities)}</ul>
+<h4>✅ Déjà bon (ne pas refaire)</h4><ul>${list(b.already_good)}</ul>
+<h4>💰 Upsell</h4><ul>${list(b.upsell)}</ul>
+<h4>🗣️ Points de discussion</h4><ul>${list(b.talking_points)}</ul>
+</div>
+<details><summary>Voir le livrable client</summary>
+<div class="deliv">
+${an.current_state?`<div class="lab">État actuel</div><div>${esc(an.current_state)}</div>`:''}
+${an.diagnostic?`<div class="lab">Diagnostic</div><div>${esc(an.diagnostic)}</div>`:''}
+<div class="lab">Title</div><code>${esc(an.title_tag)}</code>
+<div class="lab">Meta</div><code>${esc(an.meta_description)}</code>
+<div class="lab">Longues-traînes</div><div>${(an.long_tail_keywords||[]).map(esc).join(' · ')}</div>
+<div class="lab">Plan de contenu</div><ul>${(an.content_plan||[]).map(c=>`<li><b>${esc(c.title)}</b> — ${esc(c.why)}</li>`).join('')}</ul>
+${an.quick_win?`<div class="lab">Quick win</div><div>${esc(an.quick_win)}</div>`:''}
+</div></details>
+</div>`;}).join('');
+}
+// auto-load if code remembered
+if(localStorage.getItem('borAdmin'))load();
+</script>
+</body>
+</html>

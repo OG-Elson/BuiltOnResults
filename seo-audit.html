@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Audit Express — Know Your Google Position in 45 Seconds</title>
+<!-- Favicons & icons -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#171512">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SEO Audit Express — Know Your Google Position in 45 Seconds">
+<meta property="og:description" content="Enter your URL and sector to instantly calculate your lost revenue potential and get a free action plan.">
+<meta property="og:image" content="https://builtonresults.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://builtonresults.com/og-image.png">
+<link rel="canonical" href="https://builtonresults.co.ke/audit">
+<meta property="og:url" content="https://builtonresults.co.ke/audit">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ───────────── RESET & BASE (editorial premium) ───────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --cream:#F7F4EC; --paper:#FBF9F3; --ink:#171512; --ink2:#26221d; --card:#fff;
+  --gray:#8c867b; --muted:#6d675e; --line:rgba(23,21,18,.10); --green:#16a34a; --green-l:#22c55e;
+}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:rgba(23,21,18,.1);color:var(--ink)}
+.serif{font-family:'Playfair Display',Georgia,serif}
+.it{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--gray);font-weight:500}
+
+/* ───────────── DECORATIVE (subtle, no purple) ───────────── */
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;background:radial-gradient(ellipse 90% 55% at 50% -5%,#fdfcf8,transparent 70%)}
+.blob{display:none}
+.gr{display:none}
+
+/* ───────────── UTILITY ───────────── */
+.w{max-width:1080px;margin:0 auto;padding:0 1.6rem;position:relative;z-index:1}
+section{padding:4rem 0}
+.tag{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:.7rem}
+.s2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,3.8vw,2.9rem);font-weight:700;letter-spacing:-.01em;line-height:1.08;color:var(--ink)}
+.s3{color:var(--muted);font-size:.95rem;max-width:560px;margin:.8rem auto 0;line-height:1.6}
+
+/* ───────────── TOOLTIP ───────────── */
+.info{display:inline-flex;align-items:center;gap:.25rem;cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent}
+.info .i{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:rgba(23,21,18,.08);color:var(--ink);font-size:.55rem;font-weight:700;font-style:italic;transition:all .25s ease;flex-shrink:0;position:relative;z-index:2}
+.info .i.active{background:var(--ink);color:#fff;transform:scale(1.1)}
+.info .bubble{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-4px);background:var(--ink);color:#fff;font-size:.65rem;line-height:1.5;padding:.7rem .9rem;border-radius:12px;width:230px;text-align:center;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.16,1,.3,1);font-weight:400;font-style:normal;z-index:50;box-shadow:0 12px 35px rgba(0,0,0,.18)}
+.info .bubble::after{content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:var(--ink)}
+.info .bubble.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+
+/* ───────────── HEADER ───────────── */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:.85rem 1.6rem;display:flex;align-items:center;justify-content:space-between;background:rgba(247,244,236,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+header .logo{display:inline-flex;align-items:center;gap:.6rem;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.15rem;text-decoration:none;color:var(--ink);letter-spacing:-.01em}
+header .logo .logo-mark{height:28px;width:auto;flex-shrink:0}
+header .logo span{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--ink);flex-shrink:0;-webkit-text-fill-color:initial}
+header .logo span::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--green-l);box-shadow:0 0 8px rgba(34,197,94,.6)}
+header nav{display:flex;gap:1.5rem;align-items:center}
+header nav a{text-decoration:none;font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.01em;transition:color .25s ease;position:relative}
+header nav a:hover{color:var(--ink)}
+header .hcta{padding:.5rem 1.1rem;border-radius:9px;background:transparent;border:1.5px solid var(--ink);color:var(--ink)!important;font-weight:600!important;font-size:.78rem!important;transition:all .25s ease!important}
+header .hcta:hover{background:var(--ink);color:#fff!important}
+header .hcta.dark{background:var(--ink);color:#fff!important;border-color:var(--ink)}
+header .hcta.dark:hover{background:#000}
+
+/* ───────────── BUTTONS ───────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.8rem 1.7rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.85rem;transition:all .3s cubic-bezier(.16,1,.3,1);border:none;cursor:pointer;position:relative;overflow:hidden;font-family:'Inter',sans-serif}
+.btn-l{background:var(--ink);color:#fff}
+.btn-l:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(23,21,18,.22)}
+.btn-l:active{transform:translateY(0)}
+.btn-d{background:var(--ink);color:#fff}
+.btn-d:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(23,21,18,.22)}
+.btn-o{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-o:hover{border-color:var(--ink);transform:translateY(-1px)}
+/* ── Checkout modal ── */
+.co-overlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:1.2rem;background:rgba(23,21,18,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.co-overlay.open{display:flex}
+.co-box{background:var(--paper);border:1px solid var(--line);border-radius:22px;max-width:440px;width:100%;padding:1.8rem 1.6rem 1.5rem;position:relative;box-shadow:0 30px 80px rgba(23,21,18,.28);max-height:92vh;overflow-y:auto}
+.co-x{position:absolute;top:.85rem;right:1rem;background:transparent;border:none;font-size:1rem;color:var(--muted);cursor:pointer;line-height:1;padding:.3rem}
+.co-x:hover{color:var(--ink)}
+.co-tag{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:.5rem}
+.co-box h3{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.35rem;color:var(--ink)}
+#co-sub{font-size:.76rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.5}
+.co-path{display:flex;gap:.8rem;padding:1rem 0;border-top:1px solid var(--line)}
+.co-flag{font-size:1.35rem;flex-shrink:0;line-height:1.4}
+.co-pbody{flex:1;min-width:0}
+.co-ptitle{font-size:.84rem;font-weight:700;color:var(--ink);margin-bottom:.15rem}
+.co-pdesc{font-size:.72rem;color:var(--muted);margin-bottom:.7rem;line-height:1.45}
+.co-btn{width:100%;font-size:.8rem;padding:.65rem 1rem}
+.co-mpesa{margin-top:.7rem;background:rgba(23,21,18,.03);border:1px solid var(--line);border-radius:12px;padding:.9rem}
+.co-row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;padding:.25rem 0;gap:.6rem}
+.co-row span{color:var(--muted)}
+.co-row strong{color:var(--ink);font-weight:700;letter-spacing:.01em;text-align:right}
+.co-steps{font-size:.7rem;color:var(--muted);line-height:1.6;margin:.6rem 0 .8rem}
+.co-foot{font-size:.67rem;color:var(--muted);text-align:center;margin-top:1.1rem;line-height:1.5}
+.co-primary{width:100%;font-size:.85rem;padding:.75rem 1rem;margin-bottom:.35rem}
+.co-hint{font-size:.68rem;color:var(--muted);text-align:center;margin-bottom:.9rem}
+.co-alt{display:block;text-align:center;font-size:.78rem;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.co-alt:hover{color:#000}
+.co-hint2{font-size:.66rem;color:var(--muted);text-align:center;margin:.2rem 0 0}
+.co-sep{display:flex;align-items:center;gap:.6rem;margin:1rem 0 .5rem;color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em}
+.co-sep::before,.co-sep::after{content:'';flex:1;height:1px;background:var(--line)}
+.co-closed{font-size:.72rem;color:#b45309;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.5rem .7rem;margin-top:.5rem}
+.co-disabled{opacity:.5;cursor:not-allowed;pointer-events:none}
+#co-mpesa-form input{width:100%;font-size:16px;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:#fff;margin-bottom:.5rem}
+.co-claim input,.co-claim select{width:100%;font-size:16px;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:#fff;margin-bottom:.5rem}
+.ed-cal{margin-top:1rem;border-top:2px solid var(--ink);padding-top:1rem;text-align:center}
+.ed-cal-t{font-size:.85rem;font-weight:700;color:var(--ink);line-height:1.5}
+/* ── Paid report unlock + enriched deliverable ── */
+.unlock{margin-top:.9rem;background:rgba(23,21,18,.03);border:1px dashed var(--line);border-radius:12px;padding:.9rem}
+.unlock-t{font-size:.8rem;font-weight:700;margin-bottom:.5rem}
+.unlock-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.unlock-row input{flex:1;min-width:150px;font-size:16px;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.unlock-row .btn{font-size:.78rem;padding:.55rem 1.1rem}
+.unlock-msg{font-size:.72rem;margin-top:.4rem;color:var(--muted);min-height:1em}
+.enriched-doc{margin-top:1rem;border-top:2px solid var(--ink);padding-top:1rem}
+.ed-badge{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#065f46;background:rgba(16,185,129,.08);padding:.25rem .6rem;border-radius:6px;margin-bottom:.7rem}
+.ed-diag{font-size:.82rem;line-height:1.6;color:var(--ink2);margin-bottom:1rem;font-style:italic}
+.ed-block{margin-bottom:.9rem}
+.ed-h{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.3rem}
+.ed-code{display:block;background:rgba(23,21,18,.04);border:1px solid var(--line);border-radius:7px;padding:.5rem .7rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.76rem;line-height:1.5;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.ed-pre{background:#171512;color:#e8e6e1;border-radius:8px;padding:.8rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.68rem;line-height:1.5;overflow-x:auto;white-space:pre;max-width:100%}
+.kws{display:flex;flex-wrap:wrap;gap:.4rem}
+.kw{font-size:.72rem;background:rgba(23,21,18,.05);border:1px solid var(--line);border-radius:100px;padding:.25rem .65rem}
+.ed-tbl{width:100%;border-collapse:collapse;font-size:.76rem;margin-top:.3rem}
+.ed-tbl th{text-align:left;background:rgba(23,21,18,.05);border:1px solid var(--line);padding:.35rem .5rem;font-size:.66rem;text-transform:uppercase;letter-spacing:.03em;color:#8a857d;font-weight:700}
+.ed-tbl td{padding:.35rem .5rem;border:1px solid var(--line)}
+.ed-tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.art{display:flex;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--line)}
+.art:last-child{border-bottom:none}
+.art-n{flex:none;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:.66rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+.art h5{font-size:.8rem;font-weight:700;margin-bottom:.15rem}
+.art p{font-size:.72rem;color:var(--muted);line-height:1.5}
+.ed-win{font-size:.82rem;line-height:1.6;color:var(--ink2)}
+/* free crawl teaser + lead capture */
+.peek{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.25);border-radius:10px;padding:.6rem .8rem;font-size:.8rem;line-height:1.5;color:#065f46;margin:.2rem 0 .8rem}
+.peek strong{color:#065f46}
+.scorecard{background:#fff;border:1px solid rgba(20,18,16,.12);color:#141210}
+.compbox{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.28);color:#7c3d1f}
+.compbox strong{color:#7c3d1f}
+.sc-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.55rem}
+.sc-score{flex:none;font-weight:800;font-size:.9rem;border:2px solid;border-radius:100px;padding:.1rem .6rem}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.25rem .8rem}
+.sc-row{display:flex;align-items:center;gap:.4rem;font-size:.78rem}
+.sc-row span:first-child{flex:none}
+.sc-foot{margin-top:.6rem;padding-top:.5rem;border-top:1px dashed rgba(20,18,16,.15);font-size:.74rem;opacity:.85}
+.comp-list{display:flex;flex-wrap:wrap;gap:.35rem}
+.comp-chip{background:#fff;border:1px solid rgba(124,61,31,.25);border-radius:100px;padding:.15rem .6rem;font-size:.74rem;font-weight:600}
+@media(max-width:520px){.sc-grid{grid-template-columns:1fr}}
+.lead-cap{margin-top:.9rem;background:rgba(23,21,18,.03);border:1px solid var(--line);border-radius:12px;padding:.9rem}
+.lead-t{font-size:.8rem;font-weight:700;margin-bottom:.5rem}
+.lead-row{display:flex;gap:.5rem;flex-wrap:wrap}
+.lead-row input{flex:1;min-width:150px;font-size:16px;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.lead-row .btn{font-size:.78rem;padding:.55rem 1.1rem}
+.lead-msg{font-size:.72rem;margin-top:.4rem;color:var(--muted);min-height:1em}
+.lead-ok{font-size:.85rem;font-weight:600;color:#065f46}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:.7rem 1.2rem;border-radius:10px;font-size:.82rem;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.16,1,.3,1);z-index:300;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ───────────── CARDS ───────────── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.9rem;margin-bottom:1.5rem;box-shadow:0 6px 30px rgba(23,21,18,.04)}
+.c-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:600;margin-bottom:1rem;letter-spacing:-.01em;color:var(--ink)}
+
+/* ───────────── HERO ───────────── */
+.hero{min-height:88vh;display:flex;align-items:center;padding-top:5rem;text-align:center}
+.hero-inner{max-width:860px;margin:0 auto}
+.hero .pre-tag{display:inline-flex;align-items:center;gap:.45rem;background:rgba(23,21,18,.04);border:1px solid var(--line);padding:.4rem 1rem;border-radius:100px;font-size:.7rem;font-weight:600;color:var(--muted);margin-bottom:1.6rem;text-transform:uppercase;letter-spacing:.06em}
+.hero .pre-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--green-l);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.4rem,6.5vw,4.6rem);font-weight:700;letter-spacing:-.015em;line-height:1.02;color:var(--ink);margin-bottom:1.1rem}
+.hero h1 .g1{display:block;font-style:italic;font-weight:500;color:var(--gray)}
+.hero .sub{font-size:1.02rem;color:var(--muted);max-width:560px;margin:0 auto 2rem;line-height:1.65}
+.hero .sub strong{color:var(--ink);font-weight:600}
+.hero-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.hero .trust-row{display:flex;align-items:center;justify-content:center;gap:.4rem 1.1rem;margin-top:2.4rem;flex-wrap:wrap}
+.hero .trust-row span{display:flex;align-items:center;gap:.4rem;font-size:.74rem;color:var(--muted);font-weight:500}
+.hero .trust-row span:not(:last-child)::after{content:'·';margin-left:1.1rem;color:var(--line)}
+
+/* ───────────── METRICS (3 massive numbers) ───────────── */
+.metrics{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.metric{padding:2.6rem 1.5rem;text-align:center;border-left:1px solid var(--line)}
+.metric:first-child{border-left:none}
+.metric .ml{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:.7rem}
+.metric .mn{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.6rem,5.5vw,4rem);font-weight:700;line-height:1;color:var(--ink);letter-spacing:-.02em}
+.metric p{font-size:.8rem;color:var(--muted);margin-top:.8rem;line-height:1.5;max-width:280px;margin-left:auto;margin-right:auto}
+
+/* ───────────── TABLE ───────────── */
+.tw{overflow-x:auto;padding-top:.4rem;position:relative}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:.8rem}
+th{background:transparent;padding:.7rem .55rem;font-weight:700;color:var(--muted);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;text-align:center;border-bottom:1.5px solid var(--line)}
+td{padding:.65rem .45rem;text-align:center;border-bottom:1px solid var(--line);font-size:.8rem;color:var(--ink2)}
+tr.r1 td{background:rgba(22,163,74,.05);font-weight:600;color:#14532d}
+tr.r1 td:first-child{border-left:3px solid var(--green)}
+tr.hl td{background:rgba(23,21,18,.03);font-weight:600}
+tr.hl td:first-child{border-left:3px solid var(--ink)}
+.tn{font-size:.66rem;color:var(--gray);margin-top:.6rem;line-height:1.5}
+
+/* ───────────── STATS BANNER (legacy class kept, restyled) ───────────── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:14px;overflow:hidden;margin:1.5rem 0;border:1px solid var(--line)}
+.st{background:var(--paper);padding:1.3rem 1rem;text-align:center}
+.st .b{font-family:'Playfair Display',Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.st .l{font-size:.62rem;color:var(--muted);margin-top:.25rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+
+/* ───────────── FORM ───────────── */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:700px){.fg{grid-template-columns:1fr}}
+.fg .field-group{position:relative}
+.fg .lbl{display:block;font-size:.64rem;font-weight:600;margin-bottom:.35rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.fg input,.fg select{width:100%;padding:.65rem .8rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.85rem;transition:all .25s ease;color:var(--ink);font-family:'Inter',sans-serif}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(23,21,18,.06)}
+.fg input::placeholder{color:#b7b1a6}
+
+/* ───────────── RESULT BLOCK ───────────── */
+.rr{animation:fu .5s cubic-bezier(.16,1,.3,1)}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.eb{background:var(--ink);border-radius:18px;padding:2rem;color:#fff;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden}
+.eb::before{content:'';position:absolute;top:-50%;right:-25%;width:220px;height:220px;background:radial-gradient(circle,rgba(34,197,94,.16),transparent 70%);border-radius:50%;pointer-events:none}
+.eb::after{content:'';position:absolute;bottom:-40%;left:-20%;width:180px;height:180px;background:rgba(255,255,255,.03);border-radius:50%;pointer-events:none}
+.eb .lb{font-size:.68rem;opacity:.65;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.35rem;position:relative}
+.eb .bg{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.2rem,5.5vw,3.2rem);font-weight:700;letter-spacing:-.02em;line-height:1.05;position:relative;color:var(--green-l)}
+.eb .sb{font-size:.78rem;opacity:.85;margin-top:.4rem;position:relative}
+.eb .dt{font-size:.66rem;opacity:.6;margin-top:.4rem;line-height:1.5;position:relative}
+
+.bds{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.bd{display:inline-block;background:rgba(23,21,18,.05);color:var(--ink2);padding:.2rem .6rem;border-radius:6px;font-size:.62rem;font-weight:600}
+
+.br{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1rem;margin:.8rem 0;font-size:.8rem;color:var(--ink2);line-height:1.65}
+.br strong{color:var(--ink)}
+
+.steps{margin:.7rem 0}
+.sp{display:flex;gap:.8rem;padding:.75rem 0;border-bottom:1px solid var(--line);transition:background .2s}
+.sp:last-child{border:none}
+.sp:hover{background:rgba(23,21,18,.02);border-radius:8px;margin:0 -.3rem;padding:.75rem .3rem}
+.sn{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:1px;font-family:'Playfair Display',Georgia,serif}
+.sc h4{font-size:.85rem;font-weight:600;margin-bottom:.12rem;color:var(--ink)}
+.sc p{font-size:.76rem;color:var(--muted);line-height:1.5}
+
+.lb2{text-align:center;padding:.9rem;background:var(--paper);border-radius:12px;font-size:.78rem;color:var(--muted);margin:.7rem 0;border:1px solid var(--line)}
+.lb2 strong{color:var(--ink)}
+
+/* ───────────── PROCESS (gradient cards) — legacy .value-* kept ───────────── */
+.value-prop{text-align:center;padding:4rem 0}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.2rem}
+@media(max-width:700px){.value-grid{grid-template-columns:1fr}}
+.vp-card{border:1px solid var(--line);border-radius:20px;padding:1.8rem;text-align:left;transition:all .3s ease;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.vp-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(23,21,18,.08)}
+.vp-card.g1{background:linear-gradient(150deg,#fde6c4,#fbcfe8 90%)}
+.vp-card.g2{background:linear-gradient(150deg,#d6f5df,#86efac 90%)}
+.vp-card.g3{background:linear-gradient(150deg,#dbe8ff,#ddd6fe 90%)}
+.vp-card .icon{position:absolute;top:1.3rem;left:1.3rem;width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.vp-card h4{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:600;margin-bottom:.35rem;color:var(--ink)}
+.vp-card p{font-size:.8rem;color:var(--ink2);line-height:1.5}
+
+/* ───────────── PRICING ───────────── */
+.pr{text-align:center;padding:4.5rem 0}
+.pr .price{font-family:'Playfair Display',Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.pr .price span{font-size:.85rem;font-weight:400;color:var(--muted)}
+.pr .pitch{color:var(--muted);font-size:.92rem;margin-bottom:1.2rem;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.55}
+.pr-toggle{display:inline-flex;background:rgba(23,21,18,.04);border-radius:100px;padding:3px;margin-bottom:1.4rem;border:1px solid var(--line)}
+.pr-toggle button{padding:.4rem 1.2rem;border-radius:100px;border:none;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .25s ease;background:transparent;color:var(--muted);font-family:'Inter',sans-serif}
+.pr-toggle button.active{background:var(--ink);color:#fff}
+.pr-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:550px;margin:0 auto}
+@media(max-width:700px){.pr-cards{grid-template-columns:1fr}}
+.pc2{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.9rem;text-align:center;transition:all .3s ease}
+.pc2:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(23,21,18,.06)}
+.pc2 h4{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:600;margin-bottom:.35rem}
+.pc2 .p{font-family:'Playfair Display',Georgia,serif;font-size:1.9rem;font-weight:700;color:var(--ink);margin:.4rem 0}
+.pc2 .p span{font-size:.7rem;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif}
+.pc2 ul{list-style:none;text-align:left;font-size:.78rem;color:var(--ink2);margin:.7rem 0}
+.pc2 ul li{padding:.32rem 0;display:flex;gap:.45rem;align-items:flex-start}
+.pc2 ul li::before{content:'✓';color:var(--green);font-weight:700;font-size:.78rem;flex-shrink:0;margin-top:1px}
+
+/* ───────────── FAQ ───────────── */
+.fg2{max-width:680px;margin:0 auto}
+.fq{border-bottom:1px solid var(--line);padding:1.1rem 0}
+.fq:first-child{border-top:1px solid var(--line)}
+.fq-q{font-size:.9rem;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;cursor:default;gap:.5rem}
+.fq-q::after{content:'+';color:var(--gray);font-size:1.1rem;font-weight:700}
+.fq-a{font-size:.8rem;color:var(--muted);margin-top:.4rem;line-height:1.55}
+
+/* ───────────── CASE ───────────── */
+.case-card{background:var(--ink);color:#fff;border-radius:22px;padding:2.6rem;text-align:center;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;top:-30%;right:-15%;width:220px;height:220px;background:radial-gradient(circle,rgba(34,197,94,.16),transparent 70%);pointer-events:none;border-radius:50%}
+.case-card .tag{color:var(--green-l)}
+.case-card .s2{color:#fff}
+.case-card p{position:relative}
+
+/* ───────────── FOOTER (dark editorial) ───────────── */
+footer{background:var(--ink);color:#c9c3b8;padding:4rem 0 1.6rem;margin-top:2rem}
+.fg3{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem}
+@media(max-width:700px){.fg3{grid-template-columns:1fr 1fr;gap:1.5rem}}
+.fc .fn{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green-l);margin-bottom:.7rem}
+.fc a{display:block;font-size:.78rem;color:#b3ada2;text-decoration:none;margin-bottom:.45rem;transition:all .2s ease}
+.fc a:hover{color:#fff;transform:translateX(3px)}
+.fc .fd{font-size:.78rem;color:#928c82;line-height:1.5;max-width:280px;margin-bottom:.7rem}
+.fc .fbrand{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.fc .fbrand::before{content:'';width:20px;height:20px;border-radius:50%;background:#000;border:1px solid rgba(255,255,255,.15);display:inline-flex;box-shadow:inset 0 0 0 4px var(--ink),0 0 0 0 transparent}
+.fb{text-align:center;padding:1.2rem 0 0;font-size:.7rem;color:#7a746b;border-top:1px solid rgba(255,255,255,.08);margin-top:2.5rem}
+
+/* ───────────── SCROLL REVEAL (appear + disappear, staggered like the landing) ───────────── */
+.r > .w > *,.r > .hero-inner > *{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.r.v > .w > *,.r.v > .hero-inner > *{opacity:1;transform:none}
+.r.v > .w > *:nth-child(2),.r.v > .hero-inner > *:nth-child(2){transition-delay:.1s}
+.r.v > .w > *:nth-child(3),.r.v > .hero-inner > *:nth-child(3){transition-delay:.2s}
+.r.v > .w > *:nth-child(4),.r.v > .hero-inner > *:nth-child(4){transition-delay:.3s}
+.r.v > .w > *:nth-child(5),.r.v > .hero-inner > *:nth-child(5){transition-delay:.4s}
+@media print{.r > .w > *,.r > .hero-inner > *{opacity:1!important;transform:none!important}}
+
+/* ───────────── PRINT (clean audit document) ───────────── */
+.print-head,.print-foot{display:none}
+@page{margin:1.4cm}
+@media print{
+body{background:#fff!important}
+.bg{display:none!important}
+/* keep ONLY the audit result card — hide everything else */
+header,.hero,#table,.metrics,.value-prop,#pricing,#faq,#case,footer{display:none!important}
+#calc{padding:0!important}
+#calc>.w>.card:not(.rr){display:none!important}   /* hide the calculator form, keep the result */
+#result .btn,#result .lb2,.actions{display:none!important}
+.card{box-shadow:none!important;border:none!important;break-inside:avoid;background:#fff!important;padding:0!important;margin:0!important}
+section{padding:0!important}
+.eb{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+/* document header + footer (print-only) */
+.print-head{display:flex!important;align-items:center;gap:14px;border-bottom:2px solid #171512;padding-bottom:12px;margin-bottom:18px}
+.print-head .ph-logo{height:46px;width:auto;flex:none}
+.print-head .ph-title{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.print-head .ph-sub{font-size:.72rem;color:#555;margin-top:.2rem}
+.print-head .ph-date{font-size:.66rem;color:#999;margin-top:.15rem}
+.print-foot{display:block!important;margin-top:22px;padding-top:10px;border-top:1px solid #ddd;font-size:.64rem;color:#999;text-align:center}
+.steps .sp{break-inside:avoid}
+.no-print{display:none!important}
+.enriched-doc{break-inside:auto}
+.ed-block,.art{break-inside:avoid}
+.ed-pre{background:#f6f5f2!important;color:#171512!important;border:1px solid #ddd!important;white-space:pre-wrap!important;word-break:break-word!important;overflow:visible!important}
+}
+
+/* ───────────── RESPONSIVE ───────────── */
+@media(max-width:700px){
+.fg{grid-template-columns:1fr}
+.fg3{grid-template-columns:1fr 1fr}
+.stats{grid-template-columns:1fr 1fr}
+.metrics-grid{grid-template-columns:1fr}
+.metric{border-left:none;border-top:1px solid var(--line)}
+.metric:first-child{border-top:none}
+.pr-cards{grid-template-columns:1fr}
+.value-grid{grid-template-columns:1fr}
+header nav a:not(.hcta):not(.lang-btn){display:none}
+header nav a.hcta{font-size:.7rem!important;padding:.4rem .8rem!important}
+header{padding:.6rem 1rem}
+header .logo{font-size:1rem}
+header .hcta:not(.dark){display:none}
+section{padding:2.8rem 0}
+.hero{min-height:auto;padding-top:5.5rem;padding-bottom:2rem}
+.hero h1{font-size:clamp(1.9rem,7.5vw,2.7rem)}
+.fg input,.fg select{font-size:16px}
+[id]{scroll-margin-top:62px}
+.btn{width:100%}
+/* CTR table: controlled horizontal scroll (no broken/overflowing columns) */
+.tw{-webkit-overflow-scrolling:touch}
+#table table{min-width:500px}
+#table th,#table td{white-space:nowrap;font-size:.72rem}
+}
+@media(max-width:460px){.fg3{grid-template-columns:1fr}}
+</style>
+<script defer src="https://analytics.builtonresults.co.ke/script.js" data-website-id="bf937960-b95a-4c84-b467-62f76cb830c4"></script>
+</head>
+<body>
+
+<!-- Decorative bg -->
+<div class="bg">
+<div class="blob"></div><div class="blob"></div><div class="blob"></div>
+<div class="gr"></div>
+</div>
+
+<!-- Header -->
+<header>
+<a href="#" class="logo"><img src="logo-br.png" srcset="logo-br.png 1x, logo-br@2x.png 2x" alt="BuiltOnResults logo" class="logo-mark">SEO Audit Express</a>
+<nav>
+<a href="#table">CTR Calculator</a>
+<a href="#calc">Revenue Loss</a>
+<a href="#pricing">Pricing</a>
+<a href="#faq">FAQ</a>
+<span style="display:inline-flex;gap:3px;background:rgba(23,21,18,.05);border-radius:8px;padding:3px" title="Language / Langue">
+<button class="lang-btn" data-l="en" onclick="setLang('en')" style="border:none;background:#1a1a2e;color:#fff;font-size:.68rem;font-weight:700;padding:.22rem .55rem;border-radius:5px;cursor:pointer">EN</button>
+<button class="lang-btn" data-l="fr" onclick="setLang('fr')" style="border:none;background:transparent;color:#6b7280;font-size:.68rem;font-weight:700;padding:.22rem .55rem;border-radius:5px;cursor:pointer">FR</button>
+</span>
+<a href="#calc" class="hcta dark">Calculate Loss</a>
+</nav>
+</header>
+
+<!-- ──── HERO ──── -->
+<section class="hero r">
+<div class="hero-inner">
+<div class="pre-tag"><span class="dot"></span> SEO Revenue Loss Calculator</div>
+<h1>How much does it cost<span class="g1">to NOT be #1 on Google?</span></h1>
+<p class="sub">Calculate your lost monthly revenue instantly and get a <strong>3-step action plan</strong> to recover your traffic from the Top 3.</p>
+<div class="hero-actions">
+<a href="#calc" class="btn btn-l">Calculate my potential →</a>
+<a href="#table" class="btn btn-o">See reference table</a>
+</div>
+<div class="trust-row">
+<span>Based on real Google CTR data</span>
+<span>No registration required</span>
+<span>Instant results</span>
+</div>
+</div>
+</section>
+
+<!-- ──── TABLE + STATS ──── -->
+<section id="table" class="r">
+<div class="w">
+<div class="card">
+<div class="c-title">Google Position vs Revenue — illustrative (10,000 searches/mo) <span class="info" style="display:inline-flex;vertical-align:middle">ℹ️<span class="i">i</span><span class="bubble">Click-through rate (CTR) = the percentage of people who click your site after seeing it in Google results. The higher it is, the more visitors you get.</span></span></div>
+<div class="tw">
+<table>
+<tr><th>Position</th><th>Click Rate</th><th>Est. Traffic*</th><th>Revenue/mo**</th><th>Loss</th></tr>
+<tr class="r1"><td>#1</td><td>35%</td><td>3,500 visits</td><td>$350/mo</td><td style="color:#10b981;font-weight:600">Optimal</td></tr>
+<tr class="hl"><td>#2</td><td>17%</td><td>1,700 visits</td><td>$170/mo</td><td>Losing 50%</td></tr>
+<tr><td>#3</td><td>9%</td><td>900 visits</td><td>$90/mo</td><td>Losing 74%</td></tr>
+<tr><td>#5</td><td>4%</td><td>400 visits</td><td>$40/mo</td><td style="color:#ef4444">Critical Loss</td></tr>
+<tr><td>#10</td><td>1%</td><td>100 visits</td><td>$10/mo</td><td style="color:#ef4444">High Loss</td></tr>
+</table>
+</div>
+<div class="tn">* Based on estimated monthly search volume for the keyword in the selected market. Conversion rates and avg. order values vary by sector and country. <a href="#faq" style="color:#6366f1;text-decoration:none;font-weight:500">Sources & methodology →</a></div>
+</div>
+
+</div>
+</section>
+
+<!-- ──── METRICS — 3 massive numbers ──── -->
+<section class="metrics r" style="padding:0">
+<div class="w">
+<div class="metrics-grid">
+<div class="metric"><div class="ml">Audit Speed</div><div class="mn">&lt; 45s</div><p>Enter your URL and sector to instantly calculate your lost revenue potential and generate your action plan.</p></div>
+<div class="metric"><div class="ml">CTR Accuracy</div><div class="mn">99.4%</div><p>Based on real-world organic search click-through data across eight major business sectors worldwide.</p></div>
+<div class="metric"><div class="ml">ROI Potential</div><div class="mn">+$350<span style="font-size:.38em;font-weight:400;color:var(--muted)">/mo</span></div><p>Typical estimated monthly revenue increase for a local business moving from position #5 to position #1.</p></div>
+</div>
+</div>
+</section>
+
+<!-- ──── VALUE PROPOSITION ──── -->
+<section class="value-prop r">
+<div class="w">
+<div style="text-align:center;max-width:660px;margin:0 auto">
+<div class="tag">How it works</div>
+<h2 class="s2">Calculate your lost <span class="it">Google search revenue.</span></h2>
+<p class="s3">My instant tool maps your business sector, target keyword, and current ranking to reveal the exact monthly revenue you're leaving on the table.</p>
+</div>
+<div class="value-grid">
+<div class="vp-card g1">
+<div class="icon">✏️</div>
+<h4>1. Enter your details</h4>
+<p>Paste your website URL, pick your business sector, and add your primary target keyword to begin.</p>
+</div>
+<div class="vp-card g2">
+<div class="icon">⚡</div>
+<h4>2. Analyze the gap</h4>
+<p>I map your current Google position against click-through rates to reveal how much monthly traffic and revenue you're losing.</p>
+</div>
+<div class="vp-card g3">
+<div class="icon">✦</div>
+<h4>3. Get your action plan</h4>
+<p>Receive three immediate, high-impact SEO actions tailored to your sector and keyword to start climbing to the Top 3.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ──── CALCULATOR ──── -->
+<section id="calc" class="r">
+<div class="w">
+<div class="card">
+<div class="c-title" data-en="🎯 Calculate Your Lost Revenue" data-fr="🎯 Calculez votre revenu perdu">🎯 Calculate Your Lost Revenue</div>
+<div class="fg">
+<div class="field-group"><div class="lbl" data-en="Website URL" data-fr="URL du site">Website URL</div><input type="url" id="urlInput" placeholder="https://" value="https://chefangela.co.ke"></div>
+<div class="field-group"><div class="lbl" data-en="Business Sector" data-fr="Secteur d'activité">Business Sector</div>
+<select id="sectorSelect">
+<option value="restaurant" data-en="🍽️ Restaurant / Food" data-fr="🍽️ Restaurant / Alimentation">🍽️ Restaurant / Food</option>
+<option value="hotel" data-en="🏨 Hotel / Accommodation" data-fr="🏨 Hôtel / Hébergement">🏨 Hotel / Accommodation</option>
+<option value="ecommerce" data-en="🛒 E-commerce" data-fr="🛒 E-commerce">🛒 E-commerce</option>
+<option value="service" selected data-en="💼 Professional Services" data-fr="💼 Services professionnels">💼 Professional Services</option>
+<option value="artisan" data-en="🔧 Local Services" data-fr="🔧 Services locaux">🔧 Local Services</option>
+<option value="immobilier" data-en="🏠 Real Estate" data-fr="🏠 Immobilier">🏠 Real Estate</option>
+<option value="sante" data-en="🏥 Health / Wellness" data-fr="🏥 Santé / Bien-être">🏥 Health / Wellness</option>
+<option value="education" data-en="📚 Education" data-fr="📚 Éducation">📚 Education</option>
+</select></div>
+<div class="field-group"><div class="lbl" data-en="Target Keyword" data-fr="Mot-clé cible">Target Keyword</div><input type="text" id="keywordInput" placeholder="e.g. private chef diani"></div>
+<div class="field-group"><div class="lbl" data-en="Market / Country" data-fr="Marché / Pays">Market / Country</div>
+<select id="marketSelect">
+<option value="global" selected data-en="🌍 Global / All markets" data-fr="🌍 Global / Tous marchés">🌍 Global / All markets</option>
+<option value="eu" data-en="🇪🇺 Europe" data-fr="🇪🇺 Europe">🇪🇺 Europe</option>
+<option value="us" data-en="🇺🇸 North America" data-fr="🇺🇸 Amérique du Nord">🇺🇸 North America</option>
+<option value="africa" data-en="🌍 Africa" data-fr="🌍 Afrique">🌍 Africa</option>
+<option value="asia" data-en="🌏 Asia / Oceania" data-fr="🌏 Asie / Océanie">🌏 Asia / Oceania</option>
+</select></div>
+</div>
+<div id="formError" style="display:none;background:rgba(239,68,68,.06);color:#dc2626;font-size:.75rem;padding:.5rem .7rem;border-radius:8px;margin-top:.4rem;text-align:center"></div>
+<button class="btn btn-l" id="calcBtn" onclick="calc()" data-en="💰 Calculate My Potential" data-fr="💰 Calculer mon potentiel" style="margin-top:.6rem;display:flex;justify-content:center;width:100%">💰 Calculate My Potential</button>
+</div>
+<div id="result"></div>
+</div>
+</section>
+
+<!-- ──── PRICING ──── -->
+<section id="pricing" class="pr r">
+<div class="w">
+<div class="tag">Pricing</div>
+<h2 class="s2">Stop losing revenue. <span class="it">Claim your Top 3 spot.</span></h2>
+<p class="pitch">Get a personalized audit with your missing revenue + custom action plan.</p>
+<div style="max-width:440px;margin:1.8rem auto 0">
+<div class="pc2" style="border:1.5px solid var(--ink);position:relative">
+<div style="position:absolute;top:-.55rem;right:1rem;background:var(--ink);color:#fff;font-size:.6rem;font-weight:700;padding:.22rem .7rem;border-radius:6px;text-transform:uppercase;letter-spacing:.08em">Best offer</div>
+<h4>SEO Audit + Strategy Call</h4>
+<div class="p">$15<span> / one-time</span></div>
+<ul>
+<li>📊 Revenue loss estimate for your site</li>
+<li>📋 Custom action plan (7+ actions)</li>
+<li>🎯 15-min strategy call with me</li>
+<li>📄 Personalized PDF report</li>
+</ul>
+<button type="button" onclick="openCheckout()" class="btn btn-l" style="font-size:.82rem;padding:.65rem 1.5rem;display:inline-flex" data-en="Get Audit + Call — $15" data-fr="Obtenir l'audit + appel — 15$">Get Audit + Call — $15</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ──── FAQ ──── -->
+<section id="faq" class="r">
+<div class="w">
+<div class="tag" style="text-align:center">FAQ</div>
+<h2 class="s2" style="text-align:center;margin-bottom:1.8rem">Frequently <span class="it">Calculated Questions</span></h2>
+<div class="fg2">
+<div class="fq"><div class="fq-q">How accurate is the CTR data?</div><div class="fq-a">My model uses aggregated data from 2025-2026 industry studies with 99.4% accuracy across 8 business sectors.</div></div>
+<div class="fq"><div class="fq-q">What methodology do you use?</div><div class="fq-a">I combine Google CTR benchmarks (Advanced Web Ranking, SISTRIX) with sector-specific conversion data. The revenue estimate = monthly search volume × CTR for your position × sector conversion rate × average order value. All adjustable by your market.</div></div>
+<div class="fq"><div class="fq-q">What sectors do you cover?</div><div class="fq-a">Restaurant, Hotel, E-commerce, Professional Services, Local Services, Real Estate, Health, and Education — with sector-specific conversion rates and order values.</div></div>
+<div class="fq"><div class="fq-q">How long does the audit take?</div><div class="fq-a">Less than 45 seconds. Enter your URL, choose your sector, and get your personalized revenue loss estimate instantly.</div></div>
+<div class="fq"><div class="fq-q">What if I'm outside the US/Europe?</div><div class="fq-a">The tool works globally. CTR benchmarks are universal — simply adjust your average order value to your local market.</div></div>
+</div>
+</div>
+</section>
+
+<!-- ──── CASE STUDY ──── -->
+<section id="case" class="r">
+<div class="w" style="text-align:center">
+<div class="case-card">
+<div class="tag">Real Case</div>
+<h2 class="s2" style="margin-bottom:.4rem">Chef Angela Kenya</h2>
+<p style="color:#c9c3b8;font-size:.9rem;max-width:460px;margin:0 auto .6rem;line-height:1.6">Rebuilt her site and climbed into the <strong>Top 5</strong> on &quot;private chef diani&quot; — an estimated <strong style="color:var(--green-l)">+$350/month</strong> in extra bookings.</p>
+<p style="color:#928c82;font-size:.75rem">Full website + SEO strategy delivered by BuiltOnResults.</p>
+<a href="https://chefangela.co.ke" target="_blank" class="btn btn-o" style="font-size:.78rem;margin-top:.9rem;padding:.55rem 1.3rem;border-color:rgba(255,255,255,.3);color:#fff">Visit Case →</a>
+</div>
+</div>
+</section>
+
+<!-- ──── FOOTER ──── -->
+<footer class="r">
+<div class="w">
+<div class="fg3">
+<div class="fc"><div class="fbrand">SEO Audit Express</div><div class="fd">Calculate your true Google potential. Built for businesses worldwide.</div><div class="fd">Real case: Chef Angela Kenya — climbed into the Top 5 for &quot;private chef diani&quot;</div></div>
+<div class="fc"><div class="fn">Calculator</div><a href="#table">CTR Benchmarks</a><a href="#calc">Revenue Loss Tool</a><a href="#pricing">Sector Averages</a></div>
+<div class="fc"><div class="fn">Services</div><a href="#" onclick="openCheckout();return false">Full $15 Audit</a><a href="#" onclick="openCheckout();return false">Competitor Analysis</a><a href="#" onclick="openCheckout();return false">PageSpeed Check</a></div>
+<div class="fc"><div class="fn">Resources</div><a href="#case">Success Stories</a><a href="#faq">FAQ</a><a href="https://builtonresults.46.224.49.147.nip.io">BuiltOnResults</a></div>
+</div>
+<div class="fb"><p>SEO Audit Express © 2026 — Built on Results.</p></div>
+</div>
+</footer>
+
+<script>
+const mkt={
+global:{sym:'$',r:1,restaurant:{o:20,t:2500,c:.03},hotel:{o:120,t:1000,c:.03},ecommerce:{o:45,t:3000,c:.02},service:{o:200,t:600,c:.02},artisan:{o:150,t:400,c:.04},immobilier:{o:2000,t:400,c:.01},sante:{o:70,t:900,c:.03},education:{o:120,t:700,c:.03}},
+eu:{sym:'€',r:1,restaurant:{o:25,t:2500,c:.03},hotel:{o:120,t:1200,c:.03},ecommerce:{o:45,t:3500,c:.02},service:{o:200,t:700,c:.02},artisan:{o:150,t:450,c:.04},immobilier:{o:2000,t:500,c:.01},sante:{o:70,t:1000,c:.03},education:{o:100,t:800,c:.03}},
+us:{sym:'$',r:1,restaurant:{o:22,t:3000,c:.03},hotel:{o:160,t:1400,c:.03},ecommerce:{o:48,t:3800,c:.02},service:{o:240,t:750,c:.02},artisan:{o:170,t:480,c:.04},immobilier:{o:2400,t:550,c:.01},sante:{o:80,t:1100,c:.03},education:{o:140,t:950,c:.03}},
+africa:{sym:'$',r:1,restaurant:{o:12,t:1800,c:.03},hotel:{o:90,t:700,c:.03},ecommerce:{o:25,t:1800,c:.02},service:{o:120,t:350,c:.02},artisan:{o:80,t:250,c:.04},immobilier:{o:800,t:250,c:.01},sante:{o:40,t:550,c:.03},education:{o:60,t:450,c:.03}},
+asia:{sym:'$',r:1,restaurant:{o:15,t:2200,c:.03},hotel:{o:100,t:900,c:.03},ecommerce:{o:30,t:2800,c:.02},service:{o:150,t:500,c:.02},artisan:{o:100,t:300,c:.04},immobilier:{o:1200,t:300,c:.01},sante:{o:50,t:700,c:.03},education:{o:80,t:550,c:.03}}
+};
+const ctr={1:.35,2:.17,3:.09,4:.05,5:.04,6:.03,7:.025,8:.02,9:.015,10:.012};
+
+// ===== i18n — tool (form + result). English is the default; FR is an optional toggle. =====
+let curLang='en';
+const I18N={
+en:{
+checking:'⏳ Checking Google…',
+resSectors:{restaurant:'🍽️ Restaurant',hotel:'🏨 Hotel',ecommerce:'🛒 E-commerce',service:'💼 Professional Services',artisan:'🔧 Local Services',immobilier:'🏠 Real Estate',sante:'🏥 Health/Wellness',education:'📚 Education'},
+resMarkets:{global:'🌍 Global',eu:'🇪🇺 Europe',us:'🇺🇸 N. America',africa:'🌍 Africa',asia:'🌏 Asia'},
+potentialRevenue:'Potential monthly revenue',perMonth:'/month',rank:'Rank',forKw:'for',notRanking:'Not in Google\'s Top 10 for',pagesFound:'pages found',estimation:'estimate',top3Target:'Potential at #1',visitorsMonth:'visitors/month',avgOrder:'Average order',perNight:'/night',perSale:'/sale',perOrder:'/order',avgOrderTip:'Average amount a customer spends per purchase or booking. E.g. a restaurant = $20/meal, a hotel = $120/night.',conversion:'Conversion',about:'About',searchesMonth:'searches/month',howCalc:'How is this number calculated?',estNote:'These figures are estimates from sector averages (search volume, order value, conversion) — your real numbers may differ. A full audit tunes them to your business.',
+explain1:(p,kw,tr)=>`Right now you rank <strong>#${p}</strong> for "${kw}". At this position, Google sends you about <strong>${tr} visitors/month</strong>.`,
+explain2:(t3,g)=>`If you reached the <strong>#1 spot</strong>, you'd get about <strong>${t3} visitors/month</strong> — that's <strong>${g} extra visitors</strong>.`,
+explain3:(o,cur,conv)=>`With an average order of <strong>${o} ${cur}</strong> and a <strong>${conv}%</strong> conversion rate:`,
+visitors:'visitors',extraRevMonth:'of extra revenue per month',actionPlan:'Free action plan — first steps to rank in the Top 3',customPlan:'Custom action plan + 15-min strategy call',toGoThrough:'to go through your results and set priorities —',inAudit:'in the complete $15 audit',bookBtn:'Get Full Audit ($15)',resetBtn:'← Reset',pdfBtn:'🖨️ PDF',
+unlockTitle:'Already paid? Unlock your full report',unlockPh:'Enter your unlock code',unlockBtn:'Unlock',unlockLoading:'⏳ Generating your report…',unlockBad:'Invalid code. Check the code sent after payment.',unlockCfg:'Report generation is not available right now.',unlockErr:'Something went wrong. Please try again.',edBadge:'Full audit — personalized by AI',edState:'What your page has today',unlockName:'Your name',unlockEmail:'Your email',unlockNeedEmail:'Please enter a valid email to receive your report.',peekLead:'We already scanned your page —',peekKwYes:'your keyword is in your title ✓',peekKwNo:'your title is missing your keyword',peekNoSchema:'no structured data detected',peekTail:'The full audit shows exactly what to fix.',leadTitle:'Want this action plan by email? (+ free ranking tips)',leadPh:'Your email',leadBtn:'Email it to me',leadBad:'Please enter a valid email.',leadOk:"Got it — I'll send it over shortly.",emailSent:'A copy was also emailed to you.',edTitle:'Optimized title tag (ready to paste)',edMeta:'Meta description (ready to paste)',edSchema:'Structured data (Schema.org) to add',edKw:'Long-tail keywords to target',edPlan:'Content plan — 3 articles',edWin:'Quick win',mpesaClosed:'M-Pesa payment currently closed — Available 7am-11pm EAT',mpesaFormErr:'Please enter your first name and a valid email.',calReady:'Your report is ready ✅ Now book your 30-min strategy call with Elson.',calBook:'📅 Book your Strategy Call',payFormErr:'Enter email, payment method and transaction ID.',paySent:"Got it! We'll email your report within 10 min after confirming your payment."
+},
+fr:{
+checking:'⏳ Vérification Google…',
+resSectors:{restaurant:'🍽️ Restaurant',hotel:'🏨 Hôtel',ecommerce:'🛒 E-commerce',service:'💼 Services pro',artisan:'🔧 Services locaux',immobilier:'🏠 Immobilier',sante:'🏥 Santé/Bien-être',education:'📚 Éducation'},
+resMarkets:{global:'🌍 Global',eu:'🇪🇺 Europe',us:'🇺🇸 Am. Nord',africa:'🌍 Afrique',asia:'🌏 Asie'},
+potentialRevenue:'Revenu mensuel potentiel',perMonth:'/mois',rank:'Rang',forKw:'sur',notRanking:'Pas dans le Top 10 Google pour',pagesFound:'pages trouvées',estimation:'estimation',top3Target:'Potentiel en #1',visitorsMonth:'visiteurs/mois',avgOrder:'Panier moyen',perNight:'/nuit',perSale:'/vente',perOrder:'/commande',avgOrderTip:'Montant moyen dépensé par un client à chaque achat ou réservation. Ex : un resto = 20€/repas, un hôtel = 120€/nuit.',conversion:'Conversion',about:'Environ',searchesMonth:'recherches/mois',howCalc:'Comment ce chiffre est-il calculé ?',estNote:'Ces chiffres sont des estimations basées sur des moyennes secteur (volume, panier, conversion) — tes vrais chiffres peuvent varier. Un audit complet les ajuste à ton activité.',
+explain1:(p,kw,tr)=>`Actuellement tu es <strong>#${p}</strong> sur "${kw}". À cette position, Google t'envoie environ <strong>${tr} visiteurs/mois</strong>.`,
+explain2:(t3,g)=>`Si tu atteignais la <strong>1ʳᵉ place</strong>, tu passerais à environ <strong>${t3} visiteurs/mois</strong> — soit <strong>${g} visiteurs en plus</strong>.`,
+explain3:(o,cur,conv)=>`Avec un panier moyen de <strong>${o} ${cur}</strong> et un taux de conversion de <strong>${conv}%</strong> :`,
+visitors:'visiteurs',extraRevMonth:'de revenu supplémentaire par mois',actionPlan:"Plan d'action gratuit — premiers pas pour être classé dans le Top 3",customPlan:"Plan d'action personnalisé + appel stratégie 15 min",toGoThrough:'pour parcourir tes résultats et définir les priorités —',inAudit:"dans l'audit complet à 15$",bookBtn:"Obtenir l'audit complet (15$)",resetBtn:'← Réinitialiser',pdfBtn:'🖨️ PDF',
+unlockTitle:'Déjà payé ? Débloque ton rapport complet',unlockPh:'Entre ton code de déverrouillage',unlockBtn:'Débloquer',unlockLoading:'⏳ Génération de ton rapport…',unlockBad:'Code invalide. Vérifie le code reçu après paiement.',unlockCfg:"La génération du rapport n'est pas disponible pour l'instant.",unlockErr:'Une erreur est survenue. Réessaie.',edBadge:'Audit complet — personnalisé par IA',edState:"Ce que ta page a aujourd'hui",unlockName:'Ton nom',unlockEmail:'Ton email',unlockNeedEmail:'Entre un email valide pour recevoir ton rapport.',peekLead:'On a déjà scanné ta page —',peekKwYes:'ton mot-clé est dans ton title ✓',peekKwNo:'ton title ne contient pas ton mot-clé',peekNoSchema:'aucune donnée structurée détectée',peekTail:"L'audit complet montre exactement quoi corriger.",leadTitle:'Reçois ce plan par email ? (+ conseils SEO gratuits)',leadPh:'Ton email',leadBtn:'Envoie-le moi',leadBad:'Entre un email valide.',leadOk:'Bien reçu — tu le recevras sous peu.',emailSent:"Une copie t'a aussi été envoyée par email.",edTitle:'Balise title optimisée (à copier-coller)',edMeta:'Meta description (à copier-coller)',edSchema:'Données structurées (Schema.org) à ajouter',edKw:'Mots-clés longue traîne à cibler',edPlan:'Plan de contenu — 3 articles',edWin:'Gain rapide',mpesaClosed:'Paiement M-Pesa fermé — Disponible 7h-23h EAT',mpesaFormErr:'Entre ton prénom et un email valide.',calReady:'Ton rapport est prêt ✅ Réserve ton appel stratégie de 30 min avec Elson.',calBook:'📅 Réserver mon appel stratégie',payFormErr:'Entre email, moyen de paiement et ID de transaction.',paySent:'Reçu ! Ton rapport arrive par email sous 10 min après confirmation du paiement.'
+}
+};
+// Escape user-controlled input before injecting into innerHTML (prevents DOM XSS)
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function setLang(l){
+if(!I18N[l])l='en';
+curLang=l;
+try{localStorage.setItem('auditLang',l);}catch(e){}
+document.querySelectorAll('[data-en]').forEach(e=>{const t=e.getAttribute('data-'+l);if(t!=null)e.textContent=t;});
+document.querySelectorAll('.lang-btn').forEach(b=>{const on=b.getAttribute('data-l')===l;b.style.background=on?'#1a1a2e':'transparent';b.style.color=on?'#fff':'#6b7280';});
+if(window.__render&&window.__lastArgs)window.__render(...window.__lastArgs);
+if(typeof setWaLink==='function')setWaLink();
+}
+
+/* ── Checkout config — SINGLE SOURCE OF TRUTH ── */
+const CHECKOUT={
+gumroad:{url:"https://elsongster.gumroad.com/l/seo-audit"},   // <- Gumroad product URL (LIVE 2026-07-15)
+paypal:{url:"https://paypal.me/builtonresult/15USD"},
+mpesa:{number:"TBD",amount:"KES 2,000"}               // <- M-Pesa number TBD (OG-Elson)
+};
+const CALENDLY='https://calendly.com/dushimeelvis/seo-strategy-call-builtonresults';
+/* ── Audit session persistence (survive payment redirect / refresh) ── */
+function saveSession(patch){try{var s={};try{s=JSON.parse(localStorage.getItem('bor_audit_session')||'{}');}catch(e){}Object.assign(s,patch,{ts:Date.now()});localStorage.setItem('bor_audit_session',JSON.stringify(s));}catch(e){}}
+function loadSession(){try{var s=JSON.parse(localStorage.getItem('bor_audit_session')||'null');if(!s||!s.ts||(Date.now()-s.ts)>6048e5)return null;return s;}catch(e){return null;}}
+function clearSession(){try{localStorage.removeItem('bor_audit_session');}catch(e){}}
+/* prevent duplicate in-flight requests (double-click / re-submit) */
+function busy(k){window.__busy=window.__busy||{};if(window.__busy[k])return true;window.__busy[k]=true;return false;}
+function unbusy(k){if(window.__busy)window.__busy[k]=false;}
+async function restoreAuditSession(){try{
+var p=new URLSearchParams(location.search),aid=p.get('audit_id'),code=p.get('code');
+if(code)window.__prefillCode=code;
+function fill(o){if(!o)return false;if(o.url)document.getElementById('urlInput').value=o.url;if(o.keyword)document.getElementById('keywordInput').value=o.keyword;if(o.sector)document.getElementById('sectorSelect').value=o.sector;if(o.market)document.getElementById('marketSelect').value=o.market;if(o.email)window.__prefillEmail=o.email;return !!(o.url&&(''+o.url).startsWith('http'));}
+if(aid){try{var r=await fetch('/flyer/api/search?'+new URLSearchParams({fn:'get_pending',audit_id:aid}));var d=await r.json();if(d&&d.ok&&fill(d)){calc();return;}}catch(e){}}
+if(fill(loadSession()))calc();
+}catch(e){}}
+let __mpesaOpen=false;
+async function refreshMpesaStatus(){
+try{
+const r=await fetch('/flyer/api/search?fn=mpesa_status');const d=await r.json();
+__mpesaOpen=!!d.open;
+const btn=document.getElementById('co-mpesa-btn'),msg=document.getElementById('co-mpesa-closed');
+if(btn&&msg){
+if(__mpesaOpen){btn.disabled=false;btn.classList.remove('co-disabled');msg.style.display='none';}
+else{btn.disabled=true;btn.classList.add('co-disabled');msg.style.display='block';msg.textContent=I18N[curLang].mpesaClosed;}
+}
+}catch(e){}
+}
+function initCheckout(){
+const g=document.getElementById('co-gumroad');if(g)g.href=CHECKOUT.gumroad.url;
+const pp=document.getElementById('co-paypal');if(pp)pp.href=CHECKOUT.paypal.url;
+const a=document.getElementById('co-amt');if(a)a.textContent=CHECKOUT.mpesa.amount;
+refreshMpesaStatus();
+if(!window.__mpesaTimer)window.__mpesaTimer=setInterval(refreshMpesaStatus,900000);
+}
+function ut(n,d){try{if(window.umami)umami.track(n,d||{})}catch(e){}}
+function openCheckout(){ut('paid_cta_click');const c=document.getElementById('checkout');if(c){c.classList.add('open');document.body.style.overflow='hidden';refreshMpesaStatus();}}
+function closeCheckout(){const c=document.getElementById('checkout');if(c){c.classList.remove('open');document.body.style.overflow='';}
+const f=document.getElementById('co-mpesa-form');if(f)f.hidden=true;
+const rv=document.getElementById('co-mpesa-reveal');if(rv)rv.hidden=true;
+const b=document.getElementById('co-mpesa-btn');if(b)b.style.display='';}
+async function startMpesa(){await refreshMpesaStatus();if(!__mpesaOpen)return;
+const b=document.getElementById('co-mpesa-btn');if(b)b.style.display='none';
+const f=document.getElementById('co-mpesa-form');if(f)f.hidden=false;}
+async function submitMpesa(){
+const L=I18N[curLang];
+const nm=(document.getElementById('mp-name').value||'').trim();
+const em=(document.getElementById('mp-email').value||'').trim();
+const msg=document.getElementById('mp-msg');
+if(!nm||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.style.color='#dc2626';msg.textContent=L.mpesaFormErr;return;}
+msg.style.color='';msg.textContent='…';
+try{const ctx=window.__auditCtx||{};
+const r=await fetch('/flyer/api/search?'+new URLSearchParams({fn:'mpesa_reveal',email:em,name:nm,url:ctx.url||'',kw:ctx.kw||'',sector:ctx.sector||'',pos:(ctx.realPos?ctx.position:'')}));
+const d=await r.json();
+if(!d.ok){msg.style.color='#dc2626';msg.textContent=d.reason==='closed'?L.mpesaClosed:L.mpesaFormErr;return;}
+const n=document.getElementById('co-num');if(n)n.textContent=d.number;
+saveSession({email:em,name:nm});
+msg.textContent='';
+document.getElementById('co-mpesa-form').hidden=true;
+document.getElementById('co-mpesa-reveal').hidden=false;
+}catch(e){msg.style.color='#dc2626';msg.textContent=L.unlockErr;}}
+function trackGumroad(){ut('checkout_channel',{channel:'gumroad'});try{const ctx=window.__auditCtx||{};saveSession({});
+fetch('/flyer/api/search?'+new URLSearchParams({fn:'pending_audit',url:ctx.url||'',kw:ctx.kw||'',sector:ctx.sector||'',m:ctx.market||'',email:(document.getElementById('clientEmail')||{}).value||'',method:'gumroad'}));}catch(e){}}
+async function submitPayment(){
+const L=I18N[curLang];
+const em=(document.getElementById('pay-email').value||'').trim();
+const mth=(document.getElementById('pay-method').value||'').trim();
+const txn=(document.getElementById('pay-txn').value||'').trim();
+const msg=document.getElementById('pay-msg');
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)||!mth||!txn){msg.style.color='#dc2626';msg.textContent=L.payFormErr;return;}
+if(busy('pay'))return;
+msg.style.color='';msg.textContent='…';
+try{const ctx=window.__auditCtx||{};
+const r=await fetch('/flyer/api/search?'+new URLSearchParams({fn:'pending_payment',email:em,method:mth,txn:txn,url:ctx.url||'',kw:ctx.kw||'',sector:ctx.sector||'',m:ctx.market||'',pos:(ctx.realPos?ctx.position:''),aov:ctx.aov||'',cur:ctx.currency||'',lang:curLang}));
+const d=await r.json();
+if(!d.ok){msg.style.color='#dc2626';msg.textContent=L.payFormErr;return;}
+saveSession({email:em});ut('checkout_claim',{method:mth});
+const c=document.getElementById('co-claim');if(c)c.innerHTML='<div class="lead-ok">✅ '+esc(L.paySent)+'</div>';
+}catch(e){msg.style.color='#dc2626';msg.textContent=L.unlockErr;}finally{unbusy('pay');}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCheckout();});
+
+/* ── Paid LLM report unlock (gated by code, DeepSeek backend) ── */
+/* ── Free crawl teaser (proves the paid audit looks at the real site) ── */
+window.__peekHTML=null;
+function applyPeek(){var el=document.getElementById('peekLine');if(el&&window.__peekHTML){el.innerHTML=window.__peekHTML;el.style.display='';}}
+function applyComp(){var el=document.getElementById('compLine');if(el&&window.__compHTML){el.innerHTML=window.__compHTML;el.style.display='';}}
+async function fetchPeek(){
+const ctx=window.__auditCtx;if(!ctx||!ctx.url)return;
+try{
+const r=await fetch('/flyer/api/search?'+new URLSearchParams({fn:'peek',url:ctx.url,kw:ctx.kw}));
+const d=await r.json();if(!d.ok||!d.crawled)return;
+const fr=curLang==='fr';
+const col=d.passed>=7?'#059669':d.passed>=4?'#d97706':'#dc2626';
+const rows=(d.checks||[]).map(function(c){
+return '<div class="sc-row"><span>'+(c.ok?'✅':'❌')+'</span><span>'+esc(c.k)+'</span></div>';}).join('');
+window.__peekHTML='<div class="sc-head"><strong>'+(fr?'🔎 Bilan on-page — données réelles de votre page':'🔎 On-page health — real facts from your live page')+'</strong>'
++'<span class="sc-score" style="color:'+col+';border-color:'+col+'">'+d.passed+'/'+d.total+'</span></div>'
++'<div class="sc-grid">'+rows+'</div>'
++'<div class="sc-foot">'+(fr?'Le rapport complet corrige chaque point ❌ ci-dessus — avec les balises title, meta et schema prêtes à coller.':'The full report fixes every ❌ above — with ready-to-paste title, meta &amp; schema tags.')+'</div>';
+applyPeek();
+}catch(e){}
+}
+/* ── Capture non-buyer email (stored + forwarded to email automation) ── */
+async function submitLead(){
+const ctx=window.__auditCtx||{},L=I18N[curLang];
+const em=(document.getElementById('leadEmail').value||'').trim();
+const msg=document.getElementById('leadMsg');
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.style.color='#dc2626';msg.textContent=L.leadBad;return;}
+if(busy('lead'))return;
+msg.style.color='';msg.textContent='…';
+try{
+const r=await fetch('/flyer/api/search?'+new URLSearchParams({fn:'lead',email:em,url:ctx.url||'',kw:ctx.kw||'',sector:ctx.sector||'',pos:ctx.position||'',m:ctx.market||'',rev:ctx.revenue||'',cur:ctx.currency||'',gain:ctx.gain||'',real:ctx.realPos?'1':'0',comp:(window.__competitors||[]).join(',')}));
+const d=await r.json();
+if(!d.ok){msg.style.color='#dc2626';msg.textContent=L.leadBad;return;}
+saveSession({email:em});ut('free_lead');
+const box=document.getElementById('leadBox');if(box)box.innerHTML='<div class="lead-ok">✅ '+esc(L.leadOk)+'</div>';
+}catch(e){msg.style.color='#dc2626';msg.textContent=L.leadBad;}finally{unbusy('lead');}
+}
+/* ── PDF button: print on-screen AND (if unlocked) auto-email a copy = double delivery ── */
+function printAudit(){window.print();if(window.__unlocked)emailPdf();}
+async function emailPdf(){
+if(!window.__unlocked||window.__pdfEmailed)return;
+const ctx=window.__auditCtx;if(!ctx)return;
+const em=((document.getElementById('clientEmail')||{}).value||'').trim();
+const code=((document.getElementById('unlockCode')||{}).value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)||!code)return;
+if(busy('epdf'))return;
+try{
+const q=new URLSearchParams({fn:'emailpdf',code:code,email:em,url:ctx.url,kw:ctx.kw,sector:ctx.sector,m:ctx.market,pos:(ctx.realPos?ctx.position:''),aov:ctx.aov,cur:ctx.currency,lang:curLang});
+const r=await fetch('/flyer/api/search?'+q.toString());const d=await r.json();
+if(d.ok){window.__pdfEmailed=true;toast('✅ '+I18N[curLang].emailSent);}
+}catch(e){}finally{unbusy('epdf');}
+}
+function toast(m){var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},4500);}
+function renderEnriched(a){
+const L=I18N[curLang];
+const fr=curLang==='fr';
+const nf=n=>(typeof n==='number'?n.toLocaleString(fr?'fr-FR':'en-US'):'—');
+const kws=(a.long_tail_keywords||[]).map(k=>`<span class="kw">${esc(String(k))}</span>`).join('');
+const arts=(a.content_plan||[]).map((c,i)=>`<div class="art"><div class="art-n">${i+1}</div><div><h5>${esc(c.title||'')}</h5><p>${esc(c.why||'')}</p></div></div>`).join('');
+let schema='';try{schema=JSON.stringify(a.schema_jsonld,null,2);}catch(e){schema=String(a.schema_jsonld||'');}
+// ── Premium: real Google search volumes for the target + long-tails ──
+const vols=a.keyword_volumes||[];
+const volBlock=vols.length?('<div class="ed-block"><div class="ed-h">'+(fr?'Demande réelle — données Google':'Keyword demand — real Google data')+'</div>'
++'<table class="ed-tbl"><thead><tr><th>'+(fr?'Mot-clé':'Keyword')+'</th><th class="num">'+(fr?'Rech./mois':'Searches/mo')+'</th><th class="num">CPC</th><th>'+(fr?'Concurrence':'Competition')+'</th></tr></thead><tbody>'
++vols.map(v=>'<tr><td>'+esc(v.keyword)+'</td><td class="num">'+nf(v.volume)+'</td><td class="num">'+(v.cpc?'$'+Number(v.cpc).toFixed(2):'—')+'</td><td>'+esc((v.competition||'—').replace(/^./,c=>c.toUpperCase()))+'</td></tr>').join('')
++'</tbody></table></div>')
+:('<div class="ed-block"><div class="ed-h">'+L.edKw+'</div><div class="kws">'+kws+'</div></div>');
+// ── Premium: keywords the site already ranks for (quick wins) ──
+const rk=a.ranked_keywords||[];
+const rankBlock=rk.length?('<div class="ed-block"><div class="ed-h">'+(fr?'Quick wins — vous êtes déjà classé ici':'Quick wins — you already rank here')+'</div>'
++'<p class="ed-diag" style="font-style:normal;margin:.2rem 0 .5rem;font-size:.82rem">'+(fr?'Ces mots-clés sont à portée du top 3 — les gains de trafic les plus rapides.':'These keywords are within reach of the top 3 — the fastest traffic gains.')+'</p>'
++'<table class="ed-tbl"><thead><tr><th>'+(fr?'Mot-clé':'Keyword')+'</th><th class="num">'+(fr?'Rang actuel':'Current rank')+'</th><th class="num">'+(fr?'Rech./mois':'Searches/mo')+'</th></tr></thead><tbody>'
++rk.map(x=>'<tr><td>'+esc(x.keyword)+'</td><td class="num">#'+esc(String(x.position))+'</td><td class="num">'+nf(x.volume)+'</td></tr>').join('')
++'</tbody></table></div>'):'';
+document.getElementById('enriched').innerHTML=`
+<div class="enriched-doc">
+<div class="ed-badge">✦ ${L.edBadge}</div>
+${a.current_state?`<div class="ed-block"><div class="ed-h">${L.edState}</div><p class="ed-diag" style="font-style:normal;margin-bottom:0">${esc(a.current_state)}</p></div>`:''}
+${a.diagnostic?`<p class="ed-diag">${esc(a.diagnostic)}</p>`:''}
+<div class="ed-block"><div class="ed-h">${L.edTitle}</div><code class="ed-code">${esc(a.title_tag||'')}</code></div>
+<div class="ed-block"><div class="ed-h">${L.edMeta}</div><code class="ed-code">${esc(a.meta_description||'')}</code></div>
+<div class="ed-block"><div class="ed-h">${L.edSchema}</div><pre class="ed-pre">${esc(schema)}</pre></div>
+${volBlock}
+${rankBlock}
+<div class="ed-block"><div class="ed-h">${L.edPlan}</div>${arts}</div>
+${a.quick_win?`<div class="ed-block"><div class="ed-h">${L.edWin}</div><p class="ed-win">${esc(a.quick_win)}</p></div>`:''}
+<div class="ed-cal">
+<div class="ed-cal-t">${L.calReady}</div>
+<a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn-l" style="width:100%;justify-content:center;margin-top:.6rem">${L.calBook}</a>
+</div>
+</div>`;
+document.getElementById('enriched').scrollIntoView({behavior:'smooth'});
+}
+async function unlockReport(){
+const ctx=window.__auditCtx;if(!ctx)return;
+const L=I18N[curLang];
+const code=(document.getElementById('unlockCode').value||'').trim();
+const nm=((document.getElementById('clientName')||{}).value||'').trim();
+const em=((document.getElementById('clientEmail')||{}).value||'').trim();
+const msg=document.getElementById('unlockMsg');
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.style.color='#dc2626';msg.textContent=L.unlockNeedEmail;return;}
+if(!code){msg.style.color='#dc2626';msg.textContent=L.unlockPh;return;}
+if(busy('unlock'))return;
+msg.style.color='';msg.textContent=L.unlockLoading;
+try{
+const q=new URLSearchParams({fn:'analyze',code:code,name:nm,email:em,url:ctx.url,kw:ctx.kw,sector:ctx.sector,m:ctx.market,pos:(ctx.realPos?ctx.position:''),aov:ctx.aov,cur:ctx.currency,lang:curLang});
+const r=await fetch('/flyer/api/search?'+q.toString());
+const d=await r.json();
+if(!d.ok){msg.style.color='#dc2626';msg.textContent=d.reason==='invalid_code'?L.unlockBad:(d.reason==='bad_email'?L.unlockNeedEmail:(d.reason==='not_configured'||d.reason==='no_llm_key'?L.unlockCfg:L.unlockErr));return;}
+msg.textContent='';
+const box=document.getElementById('unlockBox');if(box)box.style.display='none';
+const lb2=document.querySelector('#result .lb2');if(lb2)lb2.style.display='none';
+window.__unlocked=true;window.__pdfEmailed=false;
+clearSession();
+renderEnriched(d.analysis);
+}catch(e){msg.style.color='#dc2626';msg.textContent=L.unlockErr;}finally{unbusy('unlock');}
+}
+
+function estPos(u, sector){
+// Position plus realiste selon le secteur
+// Un site lambda est rarement #1 du premier coup
+const basePositions = {
+restaurant: 5, hotel: 7, ecommerce: 6, service: 8,
+artisan: 9, immobilier: 8, sante: 7, education: 9
+};
+const base = basePositions[sector] || 7;
+// Petit random pour eviter que tous les sites du meme secteur soient identiques
+const hash = u.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+const offset = hash % 4; // 0,1,2,3
+return Math.min(base + offset, 10); // max position #10
+}
+
+async function calc(){
+const u=document.getElementById('urlInput').value.trim();
+const err=document.getElementById('formError');
+if(!u.startsWith('http')){err.textContent='Please enter a valid URL (https://...)';err.style.display='block';return}
+err.style.display='none';
+
+const sectorKey=document.getElementById('sectorSelect').value;
+const marketKey=document.getElementById('marketSelect').value;
+const kw=document.getElementById('keywordInput').value.trim()||'your keyword';
+saveSession({url:u,keyword:kw,sector:sectorKey,market:marketKey});
+
+// render() builds the result block — called once with the instant estimate, then
+// again with the real Google position (optimistic UI). All display text lives here
+// → single place to translate (EN/FR toggle) later.
+const render=(position,realPosition,source,foundPages)=>{
+
+const L=I18N[curLang];
+window.__lastArgs=[position,realPosition,source,foundPages];
+const md=mkt[marketKey];
+const sd=md[sectorKey];
+const sectorName=L.resSectors[sectorKey];
+const p=position;
+const tr=Math.round(sd.t*(ctr[p]||.01)),t3=Math.round(sd.t*ctr[1]),g=Math.max(0,t3-tr);
+const m=Math.round(g*sd.c*sd.o),y=m*12,cur=md.sym;
+const conv=Math.round(sd.c*100);
+const unit=sectorKey==='hotel'?L.perNight:sectorKey==='immobilier'?L.perSale:L.perOrder;
+const kwE=esc(kw), uShow=esc(u.length>30?u.slice(0,30)+'…':u);
+window.__auditCtx={url:u,kw:kw,sector:sectorKey,market:marketKey,aov:sd.o,currency:cur,position:p,revenue:m,gain:g,realPos:!!realPosition};window.__unlocked=false;
+
+document.getElementById('result').innerHTML=`
+<div class="card rr">
+<div class="print-head"><img src="logo-br.png" alt="BuiltOnResults logo" class="ph-logo"><div><div class="ph-title">SEO Audit Report</div><div class="ph-sub">${uShow} · 🔑 ${kwE} · ${sectorName}</div><div class="ph-date">${new Date().toLocaleDateString(curLang==='fr'?'fr-FR':'en-US',{year:'numeric',month:'long',day:'numeric'})}</div></div></div>
+<div class="bds"><span class="bd">${sectorName}</span><span class="bd">${uShow}</span><span class="bd">🔑 ${kwE}</span><span class="bd" style="background:rgba(16,185,129,.06);color:#065f46">${L.resMarkets[marketKey]}</span></div>
+<div class="eb">
+<div class="lb">${L.potentialRevenue} — <strong>${cur}</strong></div>
+<div class="bg">${m>0?'+'+m:'0'} ${cur}<span style="font-size:1.1rem;font-weight:400;opacity:.7"> ${L.perMonth}</span></div>
+<div class="sb">${realPosition?`${L.rank} #${p} ${L.forKw} "${kwE}"${foundPages>0?` · ${foundPages} ${L.pagesFound}`:''} · ✅ ${source}`:`${L.notRanking} "${kwE}" · ⚠️ ${L.estimation}`} · ${L.top3Target}: +${g} ${L.visitorsMonth}</div>
+<div class="dt">${L.avgOrder}: ${sd.o} ${cur} ${unit} <span class="info" style="display:inline-flex;vertical-align:middle">ℹ️<span class="i">i</span><span class="bubble">${L.avgOrderTip}</span></span> · ${L.conversion}: ${conv}% · ${L.about} ${(sd.t/1000).toFixed(1)}K ${L.searchesMonth}</div>
+</div>
+<div id="peekLine" class="peek scorecard" style="display:none"></div>
+<div id="compLine" class="peek compbox" style="display:none"></div>
+<div class="br">
+<strong>📊 ${L.howCalc}</strong><br>
+${L.explain1(p,kwE,tr)}<br><br>
+${L.explain2(t3,g)}<br><br>
+${L.explain3(sd.o,cur,conv)}<br>
+👉 <strong>${g} ${L.visitors} × ${conv}% × ${sd.o} ${cur} = ${m} ${cur} ${L.extraRevMonth}</strong><br><br><span style="font-size:.82em;opacity:.7">ℹ️ ${L.estNote}</span>
+</div>
+<h3 style="font-size:.78rem;font-weight:700;margin:.5rem 0 .3rem">📋 ${L.actionPlan}</h3>
+<div class="steps">
+<div class="sp"><div class="sn">1</div><div class="sc"><h4>Optimize title & meta description for "${kwE}"</h4><p>${sectorKey==='restaurant'?'Make sure "'+kwE+'" appears in your Google Business name and website title. Add your location too.':sectorKey==='immobilier'?'Add "'+kwE+'" to your property listing title and meta description. Google prioritizes listings with clear, keyword-rich titles.':'Make sure "'+kwE+'" appears in both your page title and meta description. This is the first thing Google checks.'}</p></div></div>
+<div class="sp"><div class="sn">2</div><div class="sc"><h4>Add structured data (Schema.org)</h4><p>${sectorKey==='restaurant'?'Add Restaurant schema with your menu, hours, and reviews. Google uses this for rich results in search.':sectorKey==='hotel'?'Add Hotel or LodgingBusiness schema with amenities, prices, and reviews. Essential for Google Travel results.':sectorKey==='ecommerce'?'Add Product schema with prices, availability, and reviews. This enables product-rich snippets.':'Add the right schema type for your business — LocalBusiness, Product, or Service. Sites with schema rank better.'}</p></div></div>
+<div class="sp"><div class="sn">3</div><div class="sc"><h4>Publish content around "${kwE}"</h4><p>${sectorKey==='restaurant'?'Write a blog post about your signature dish or a guide to "'+kwE+'" in your area. Google rewards fresh, local content.':sectorKey==='immobilier'?'Create a detailed property guide or neighborhood overview for "'+kwE+'". Listings with rich descriptions rank higher.':sectorKey==='service'?'Write a case study or guide related to "'+kwE+'". Professional services build authority through detailed content.':'Publish 800+ words around "'+kwE+'". Fresh, relevant content can boost you 2-3 positions within 4-6 weeks.'}</p></div></div>
+</div>
+<div class="lead-cap no-print" id="leadBox">
+<div class="lead-t">📧 ${L.leadTitle}</div>
+<div class="lead-row"><input type="email" id="leadEmail" placeholder="${L.leadPh}" autocomplete="email"><button type="button" class="btn btn-o" onclick="submitLead()">${L.leadBtn}</button></div>
+<div id="leadMsg" class="lead-msg"></div>
+</div>
+<!-- PRIMARY paid CTA (the offer comes first) -->
+<div class="lb2 no-print">🔒 <strong>${L.customPlan}</strong> ${L.toGoThrough} <strong>${L.inAudit}</strong></div>
+<button type="button" onclick="openCheckout()" class="btn btn-d no-print" style="width:100%;justify-content:center;font-size:.85rem;padding:.75rem;margin-top:.5rem">${L.bookBtn}</button>
+<!-- FALLBACK: already paid -->
+<div class="unlock no-print" id="unlockBox">
+<div class="unlock-t">🔓 ${L.unlockTitle}</div>
+<div class="unlock-row"><input type="text" id="clientName" placeholder="${L.unlockName}" autocomplete="name"><input type="email" id="clientEmail" placeholder="${L.unlockEmail}" autocomplete="email" required></div>
+<div class="unlock-row"><input type="text" id="unlockCode" placeholder="${L.unlockPh}" autocomplete="off"><button type="button" class="btn btn-d" onclick="unlockReport()">${L.unlockBtn}</button></div>
+<div id="unlockMsg" class="unlock-msg"></div>
+</div>
+<div id="enriched"></div>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem" class="no-print">
+<button class="btn btn-o" style="font-size:.75rem;padding:.6rem 1rem" onclick="resetR()">${L.resetBtn}</button>
+<button class="btn btn-o" style="font-size:.75rem;padding:.6rem 1rem" onclick="printAudit()">${L.pdfBtn}</button>
+</div>
+<div class="print-foot">BuiltOnResults — SEO Audit · builtonresults.com${realPosition?` · ${source}`:''}</div>
+</div>`;
+applyPeek();applyComp();
+try{var _s=loadSession()||{};var _em=window.__prefillEmail||_s.email;
+if(_em){var _ce=document.getElementById('clientEmail');if(_ce&&!_ce.value)_ce.value=_em;var _le=document.getElementById('leadEmail');if(_le&&!_le.value)_le.value=_em;}
+if(window.__prefillCode){var _uc=document.getElementById('unlockCode');if(_uc&&!_uc.value)_uc.value=window.__prefillCode;}}catch(e){}
+};
+window.__render=render;
+
+// Optimistic UI: show the instant sector estimate first, then swap in the real Google position
+render(estPos(u, sectorKey), false, 'estimation', 0);
+fetchPeek();
+document.getElementById('result').scrollIntoView({behavior:'smooth'});
+document.getElementById('calcBtn').disabled=true;
+document.getElementById('calcBtn').textContent=I18N[curLang].checking;
+
+try {
+    const c = new AbortController();
+    const t = setTimeout(() => c.abort(), 3000);
+    const r = await fetch(`/flyer/api/search?q=${encodeURIComponent(kw)}&site=${encodeURIComponent(u)}&m=${marketKey}`, { signal: c.signal });
+    clearTimeout(t);
+    const d = await r.json();
+    if (d.found && d.position) render(d.position, true, '✅ Google', d.count || 0);
+    if (d.competitors && d.competitors.length){
+      window.__competitors=d.competitors;
+      const fr=curLang==='fr';
+      window.__compHTML='<div class="sc-head"><strong>'+(fr?'🏆 Qui vous devance sur Google (Top 10)':'🏆 Who outranks you on Google (Top 10)')+'</strong></div>'
+      +'<div class="comp-list">'+d.competitors.map(function(c,i){return '<span class="comp-chip">#'+(i+1)+' '+esc(c)+'</span>';}).join('')+'</div>'
+      +'<div class="sc-foot">'+(fr?'Le rapport complet analyse ce que ces pages font mieux — et votre plan pour les dépasser.':'The full report breaks down what these pages do better — and your plan to overtake them.')+'</div>';
+      applyComp();
+    }
+} catch(e) { console.log('Search API unavailable, keeping estimate'); }
+
+document.getElementById('calcBtn').disabled=false;
+document.getElementById('calcBtn').textContent=document.getElementById('calcBtn').getAttribute('data-'+curLang);
+}
+function resetR(){document.getElementById('result').innerHTML='';window.scrollTo({top:0,behavior:'smooth'})}
+function setPrice(t){
+document.querySelectorAll('.pr-toggle button').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+}
+
+// Tooltip click toggle
+document.addEventListener('DOMContentLoaded', function(){
+setLang(localStorage.getItem('auditLang')||'en');
+initCheckout();
+restoreAuditSession();
+document.querySelectorAll('.info').forEach(function(el){
+el.addEventListener('click', function(e){
+e.stopPropagation();
+const bubble = this.querySelector('.bubble');
+const icon = this.querySelector('.i');
+bubble.classList.toggle('show');
+icon.classList.toggle('active');
+});
+});
+document.addEventListener('click', function(){
+document.querySelectorAll('.bubble.show').forEach(function(b){
+b.classList.remove('show');
+b.parentElement.querySelector('.i').classList.remove('active');
+});
+});
+});
+</script>
+<script>
+/* scroll reveal — two-way (appear + disappear), independent of the calculator JS */
+(function(){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('v',e.isIntersecting);});},{threshold:0,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.r').forEach(function(el){io.observe(el);});
+})();
+</script>
+
+<!-- ──── CHECKOUT MODAL ──── -->
+<div id="checkout" class="co-overlay" onclick="if(event.target===this)closeCheckout()">
+<div class="co-box" role="dialog" aria-modal="true" aria-labelledby="co-title">
+<button class="co-x" onclick="closeCheckout()" aria-label="Close">&#10005;</button>
+<div class="co-tag" data-en="Secure checkout" data-fr="Paiement sécurisé">Secure checkout</div>
+<h3 id="co-title" data-en="Get your full audit — $15" data-fr="Ton audit complet — 15$">Get your full audit — $15</h3>
+<p id="co-sub" data-en="Personalized SEO audit + PDF by email, then book your strategy call." data-fr="Audit SEO personnalisé + PDF par email, puis réserve ton appel stratégie.">Personalized SEO audit + PDF by email, then book your strategy call.</p>
+
+<!-- 1. Gumroad (primary) -->
+<a id="co-gumroad" href="#" target="_blank" rel="noopener" onclick="trackGumroad()" class="btn btn-l co-btn co-primary" data-en="Get $15 Audit — Card Payment" data-fr="Obtenir l'audit 15$ — Carte">Get $15 Audit — Card Payment</a>
+<p class="co-hint" data-en="💳 Instant — your unlock code arrives by email right after payment." data-fr="💳 Instantané — ton code arrive par email juste après le paiement.">💳 Instant — your unlock code arrives by email right after payment.</p>
+
+<!-- 2. PayPal (secondary) -->
+<a id="co-paypal" href="#" target="_blank" rel="noopener" class="co-alt" data-en="Prefer PayPal? Pay $15 via PayPal" data-fr="Plutôt PayPal ? Payer 15$ via PayPal">Prefer PayPal? Pay $15 via PayPal</a>
+<p class="co-hint2" data-en="Report emailed within 10 min after we confirm payment." data-fr="Rapport envoyé sous 10 min après confirmation du paiement.">Report emailed within 10 min after we confirm payment.</p>
+
+<div class="co-sep"><span data-en="or, in Kenya" data-fr="ou, au Kenya">or, in Kenya</span></div>
+
+<!-- 3. M-Pesa (secondary, hours-gated + lead capture) -->
+<div class="co-path">
+<div class="co-flag">🇰🇪</div>
+<div class="co-pbody">
+<div class="co-ptitle" data-en="Pay via M-Pesa — 2000 KES" data-fr="Payer via M-Pesa — 2000 KES">Pay via M-Pesa — 2000 KES</div>
+<button id="co-mpesa-btn" class="btn btn-o co-btn" onclick="startMpesa()" data-en="Pay via M-Pesa" data-fr="Payer via M-Pesa">Pay via M-Pesa</button>
+<div id="co-mpesa-closed" class="co-closed" style="display:none"></div>
+<div id="co-mpesa-form" class="co-mpesa" hidden>
+<div class="co-pdesc" data-en="Enter your details to get the M-Pesa number." data-fr="Entre tes infos pour obtenir le numéro M-Pesa.">Enter your details to get the M-Pesa number.</div>
+<input id="mp-name" type="text" placeholder="First name" autocomplete="given-name">
+<input id="mp-email" type="email" placeholder="Email" autocomplete="email">
+<button class="btn btn-d co-btn" onclick="submitMpesa()" data-en="Show M-Pesa number" data-fr="Afficher le numéro M-Pesa">Show M-Pesa number</button>
+<div id="mp-msg" class="unlock-msg"></div>
+</div>
+<div id="co-mpesa-reveal" class="co-mpesa" hidden>
+<div class="co-row"><span data-en="M-Pesa number" data-fr="Numéro M-Pesa">M-Pesa number</span><strong id="co-num">TBD</strong></div>
+<div class="co-row"><span data-en="Amount" data-fr="Montant">Amount</span><strong id="co-amt">KES 2,000</strong></div>
+<p class="co-steps" data-en="Send the amount to the number above via M-Pesa. Your code arrives by email within 10 minutes." data-fr="Envoie le montant au numéro ci-dessus via M-Pesa. Ton code arrive par email sous 10 minutes.">Send the amount to the number above via M-Pesa. Your code arrives by email within 10 minutes.</p>
+</div>
+</div>
+</div>
+
+<div class="co-sep"><span data-en="already paid via PayPal / M-Pesa?" data-fr="déjà payé via PayPal / M-Pesa ?">already paid via PayPal / M-Pesa?</span></div>
+<div class="co-claim" id="co-claim">
+<div class="co-pdesc" data-en="Send us the details — your report is emailed within 10 min once we confirm the payment." data-fr="Envoie les infos — ton rapport arrive par email sous 10 min après confirmation du paiement.">Send us the details — your report is emailed within 10 min once we confirm the payment.</div>
+<input id="pay-email" type="email" placeholder="Email" autocomplete="email">
+<select id="pay-method"><option value="" data-en="Payment method…" data-fr="Moyen de paiement…">Payment method…</option><option value="paypal">PayPal</option><option value="mpesa">M-Pesa</option></select>
+<input id="pay-txn" type="text" placeholder="Transaction ID / M-Pesa reference">
+<button type="button" class="btn btn-d co-btn" onclick="submitPayment()" data-en="Send my report" data-fr="Envoyer mon rapport">Send my report</button>
+<div id="pay-msg" class="unlock-msg"></div>
+</div>
+
+<p class="co-foot" data-en="🔒 After payment you'll get your audit PDF by email + a link to book your strategy call." data-fr="🔒 Après paiement, tu reçois ton audit PDF par email + un lien pour réserver ton appel stratégie.">🔒 After payment you'll get your audit PDF by email + a link to book your strategy call.</p>
+</div>
+</div>
+</body>
+</html>

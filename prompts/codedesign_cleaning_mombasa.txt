@@ -1,0 +1,35 @@
+Build a modern, PREMIUM, high-converting ONE-PAGE marketing website for a professional CLEANING SERVICES company in Mombasa, Kenya (residential + commercial). Single static page, mobile-first, minimal JavaScript so it exports cleanly to plain HTML. Goal: eye-catching, trustworthy, conversion-focused — it must look like a real premium local brand, NOT an AI template.
+
+STYLE DIRECTION (be explicit — this is critical):
+- NOT dark. NOT minimal/empty. NOT a generic default template. Warm, fresh, clean, trustworthy.
+- PALETTE (use these exact hex): background cream #F5F0E7 · primary teal #0D9488 (trust, cleanliness) · accent coral #E8A87C (warmth, CTA buttons) · text ink #141210 (strong contrast) · soft badges/panels light green #F0FDF4. If teal is used on TEXT over cream, darken it to #0F766E for readable contrast.
+- TYPOGRAPHY: headings in Plus Jakarta Sans (700/800), body in Inter (400, 16–18px). Clear hierarchy — do NOT set everything bold.
+- FEEL premium (avoid "AI look"): GENEROUS white space (this matters most), rounded cards, soft shadows, subtle hover micro-interactions, smooth scroll, big bold hero. Real-photo placeholders (sparkling home/office, uniformed cleaners, before/after) — no generic clip-art illustrations.
+
+CONTENT RULE: one punchy sentence per section, not long paragraphs. Benefit-driven, local, professional tone.
+
+SECTIONS — keep it TIGHT: exactly 7 sections (plus sticky header). Do NOT add more.
+- Sticky header: logo "[Company Name]" + nav (Services, Why Us, Reviews, Contact) + phone + prominent coral "Get a Free Quote" button + WhatsApp icon.
+1. HERO: H1 "Professional Cleaning Services in Mombasa" + one-line subheadline ("Trusted residential & commercial cleaning across Mombasa — insured, vetted, satisfaction guaranteed."). Two CTAs: "Get a Free Quote" (coral) + "Chat on WhatsApp" (teal outline). Hero image. A trust badge row (Fully Insured · Vetted Staff · Eco-Friendly · 100% Satisfaction Guarantee) and an inline stat strip (500+ homes cleaned · 5-star rated · same-day available · locally owned in Mombasa).
+2. SERVICES grid (icon cards, one benefit line each): Home/Residential, Office/Commercial, Deep Cleaning, Move-In/Move-Out, Carpet & Upholstery, Sofa & Mattress, Post-Construction, Fumigation & Pest Control.
+3. WHY CHOOSE US: vetted & background-checked staff · fully insured · eco-friendly products · satisfaction guarantee (free re-clean) · flexible scheduling · transparent pricing · M-Pesa accepted. End the section with a compact 3-step "How it works" strip: 1) Request a free quote → 2) Pick a time → 3) Relax, we make it spotless.
+4. BEFORE / AFTER: an interactive before/after COMPARISON SLIDER (draggable handle over paired photos) — the highest-converting element in this niche.
+5. TESTIMONIALS: 3–4 five-star review cards with customer name + neighborhood.
+6. PRICING + CTA BAND: "Transparent pricing — request a free custom quote in 2 minutes." Show a KES starting-from range to reassure, then a strong CTA band: "Ready for a spotless home or office? Get your free quote today."
+7. CONTACT / QUOTE FORM + FOOTER: form (Name, Phone/WhatsApp, Service type dropdown, Preferred date, Message) with big WhatsApp click-to-chat + click-to-call side by side. Footer: service-area tags (Nyali, Bamburi, Mtwapa, Shanzu, Tudor, Kizingo, Likoni, Diani), working hours, a compact 5-question FAQ (supplies? insured & vetted? areas? cost? M-Pesa?), social links, WhatsApp, copyright.
+
+CONVERSION:
+- WhatsApp click-to-chat + click-to-call in header, hero, CTA band, and footer (one tap).
+- Free-quote form reachable from every CTA; repeat CTAs down the page.
+
+TECHNICAL / SEO:
+- Semantic HTML5, single <h1> containing "Cleaning Services in Mombasa", logical h2/h3.
+- SEO title + meta description with the keyword. JSON-LD LocalBusiness/CleaningService (name, areaServed: Mombasa, services, phone). Image alt text everywhere.
+- Fast, lightweight, mobile-first, minimal JS so it exports to clean static HTML.
+
+PLACEHOLDERS: brand name "[Company Name]", phone "+254 700 000 000", prices in KES.
+
+--- NOTE INTERNE (ne pas coller dans codedesign) ---
+Workflow post-génération (réf. Hermes .hermes/skills/creative/webdesigner/references/codedesign-ai-extraction.md) :
+générer → extraire le HTML (document.querySelector('html').outerHTML depuis playground.codedesign.app) → me le transmettre → je reconstruis en HTML/Tailwind statique propre. Ne PAS copier les images Unsplash (licence) — remplacer par des photos locales réelles côté kenyan.
+Historique review : 14→11→7 sections (OG-Elson : 7 suffisent). Slider before/after explicite. Teal texte #0F766E si contraste limite.

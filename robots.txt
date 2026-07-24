@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /audits
+
+Sitemap: https://builtonresults.co.ke/sitemap.xml
