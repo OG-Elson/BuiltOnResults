@@ -1,5 +1,37 @@
 # Handoff — BuiltOnResults
 
+## Session 2026-07-24 — Réorganisation projet + plan d'acquisition
+
+**A) Grand chantier de réorganisation du rangement (TERMINÉ).** Le projet était éparpillé sur
+4 emplacements + squattait le repo Flyer_gigs + avait une expo PII sur le web. Corrigé :
+- **Repo dédié** `github.com/OG-Elson/BuiltOnResults` (privé) — le code a enfin git/backup.
+  Auth push : compte `OG-Elson` via token (`~/.bor_gh_token`, dans le credential store).
+- **Docs** rapatriés dans le repo (`docs/`). Le **vault** ne garde qu'un **pointeur**
+  (`projects/builtonresults/README.md`) + le channel. Modèle : vault = coordination inter-agent
+  seulement ; chaque projet = son repo (comme Chef Angela).
+- **Sensible → Drive** : `prospects_cote_mombasa.csv` → **Sheet Google éditable**
+  « BuiltOnResults — Prospects (Mombasa) » (dossier Drive « BuiltOnResults — Data & Sensible »).
+  Le CSV/leads restent hors versionnement (`~/builtonresults_data/`). leads/audits déjà
+  consultables via le **backoffice** `audits.html` (code admin `~/.bor_admin`).
+- **Expo PII fermée** : les pages `_send/` (numéros prospects) étaient servies en clair. Désormais
+  gétées par le **code admin** via le daemon (`fn=send_tool`, lit `~/builtonresults_data/_send_tool/`,
+  hors web-root) ; les pages publiques `/_send/` sont des **loaders** sans PII.
+- **Deploy propre** : `deploy.sh` (repo) — whitelist explicite (impossible de publier docs/.git/PII),
+  renomme `seo-audit.html`→`audit.html`, réécrit `/flyer/`→propre + `.com`→`.co.ke`. Validé
+  byte-identique à la prod.
+- **Nginx dé-squatté** : docroot basculé de `/var/www/flyer-gigs/builtonresults-prod` →
+  **`/var/www/builtonresults`** (backup `builtonresults.bak-4d`). Live vérifié OK.
+- ⚠️ **Reste optionnel** : purger l'ancien `/var/www/flyer-gigs/{builtonresults-prod,out}` (plus servis).
+- ⚠️ `seo-audit-preview.html` dans le repo = **variante stale**, NON déployée (la vraie source = `seo-audit.html`).
+
+**B) Plan d'acquisition social (validé, pas encore exécuté).** Direction A : **social d'abord**
+(Facebook + Instagram), 3 axes (social / site-SEO / outbound). Plans dans `docs/` :
+`plan_acquisition_social_2026-07.md` (cadre) + `plan_acquisition_semaine0_2026-07.md` (actions 0€-first :
+créer IG/FB, bios rédigées, carrousels, gate → audit gratuit). Décisions actées : faceless, anglais,
+10-20h/sem, boost au besoin. **En attente** : recherche outil **Polo AI** (via Hermes) + **chiffres
+case study Angela** + création des comptes IG/FB (action OG-Elson). Logo profil prêt :
+`docs/assets/br_avatar_512.png`.
+
 ## Dernière session : 2026-07-20
 
 ## État actuel
