@@ -28,3 +28,6 @@ mobile_review_screenshots/
 # ── Artefacts de déploiement ──
 out/
 builtonresults-prod/
+
+# Build de deploy (staging)
+.deploy-staging/

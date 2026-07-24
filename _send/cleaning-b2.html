@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Outreach</title></head>
+<body style="font-family:system-ui,sans-serif;max-width:680px;margin:0 auto;padding:24px 16px;background:#F5F1E8;color:#1A1F1F">
+<p id="s">Chargement…</p>
+<script>
+(function(){
+  var page="cleaning-b2";
+  var code=localStorage.getItem("borAdmin")||prompt("Code admin");
+  if(!code){document.getElementById("s").textContent="Code requis.";return;}
+  fetch("/api/search?fn=send_tool&page="+encodeURIComponent(page)+"&code="+encodeURIComponent(code))
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.text();})
+    .then(function(h){localStorage.setItem("borAdmin",code);document.open();document.write(h);document.close();})
+    .catch(function(){localStorage.removeItem("borAdmin");document.getElementById("s").textContent="Accès refusé. Recharge la page pour réessayer.";});
+})();
+</script></body></html>
