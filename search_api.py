@@ -1221,6 +1221,22 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 self._send(200, 'text/html; charset=utf-8', brief_page_html(res).encode('utf-8'))
             return
+        # Internal outreach send pages (contain prospect PII) — gated by the admin code,
+        # served from OUTSIDE the web root. The public /_send/ pages are loader shells only.
+        if parsed.path == '/search' and params.get('fn', [''])[0] == 'send_tool':
+            admins = get_admin_codes()
+            code = params.get('code', [''])[0].strip()
+            page = params.get('page', [''])[0].strip()
+            if not admins or code not in admins:
+                self._send(403, 'text/plain; charset=utf-8', b'Forbidden'); return
+            if page not in ('cleaning-b2', 'reply'):
+                self._send(404, 'text/plain; charset=utf-8', b'Not found'); return
+            try:
+                with open(os.path.expanduser('~/builtonresults_data/_send_tool/%s.html' % page), 'rb') as f:
+                    self._send(200, 'text/html; charset=utf-8', f.read())
+            except OSError:
+                self._send(404, 'text/plain; charset=utf-8', b'Not found')
+            return
 
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
