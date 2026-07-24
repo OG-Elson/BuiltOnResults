@@ -41,8 +41,9 @@ DIRS=( showcase images )
 # _send/    : loaders SANS PII (les vraies pages PII sont servies par le daemon)
 
 echo "▶ Deploy propre → $DEST"
-rm -rf "$DEST"
 mkdir -p "$DEST"
+# vide le CONTENU (pas le dossier lui-même : son parent peut être root-owned, ex. /var/www)
+rm -rf "${DEST:?}"/* "${DEST:?}"/.[!.]* 2>/dev/null || true
 
 # 1) fichiers racine
 for f in "${FILES[@]}"; do cp "$SRC/$f" "$DEST/$f"; done
@@ -71,6 +72,9 @@ find "$DEST" -name '*.html' -type f -print0 | while IFS= read -r -d '' h; do
     -e 's#builtonresults\.com#builtonresults.co.ke#g' \
     "$h"
 done
+
+# 7) permissions lisibles par nginx (www-data)
+chmod -R a+rX "$DEST"
 
 echo "✔ Construit. Fichiers : $(find "$DEST" -type f | wc -l)"
 echo "  Vérifier : aucune trace /flyer/ ou builtonresults.com, puis rsync vers la prod."
