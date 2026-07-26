@@ -924,6 +924,10 @@ if(window.__prefillCode){var _uc=document.getElementById('unlockCode');if(_uc&&!
 };
 window.__render=render;
 
+// Reset ALL per-audit state so nothing from a previous run leaks in (competitors, peek, position).
+window.__compHTML=''; window.__competitors=null; window.__peekHTML='';
+var _cl=document.getElementById('compLine'); if(_cl){_cl.innerHTML='';_cl.style.display='none';}
+var _pl=document.getElementById('peekLine'); if(_pl){_pl.innerHTML='';_pl.style.display='none';}
 // Optimistic UI: show the instant sector estimate first, then swap in the real Google position
 render(estPos(u, sectorKey), false, 'estimation', 0, true);
 fetchPeek();
