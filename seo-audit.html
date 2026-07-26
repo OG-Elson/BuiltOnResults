@@ -855,7 +855,7 @@ saveSession({url:u,keyword:kw,sector:sectorKey,market:marketKey});
 // render() builds the result block — called once with the instant estimate, then
 // again with the real Google position (optimistic UI). All display text lives here
 // → single place to translate (EN/FR toggle) later.
-const render=(position,realPosition,source,foundPages)=>{
+const render=(position,realPosition,source,foundPages,loading)=>{
 
 const L=I18N[curLang];
 window.__lastArgs=[position,realPosition,source,foundPages];
@@ -877,7 +877,7 @@ document.getElementById('result').innerHTML=`
 <div class="eb">
 <div class="lb">${L.potentialRevenue} — <strong>${cur}</strong></div>
 <div class="bg">${m>0?'+'+m:'0'} ${cur}<span style="font-size:1.1rem;font-weight:400;opacity:.7"> ${L.perMonth}</span></div>
-<div class="sb">${realPosition?`${L.rank} #${p} ${L.forKw} "${kwE}"${foundPages>0?` · ${foundPages} ${L.pagesFound}`:''} · ✅ ${source}`:`${L.notRanking} "${kwE}" · ⚠️ ${L.estimation}`} · ${L.top3Target}: +${g} ${L.visitorsMonth}</div>
+<div class="sb">${loading?`⏳ ${curLang==='fr'?'Vérification de votre position Google…':'Checking your live Google ranking…'}`:(realPosition?`${L.rank} #${p} ${L.forKw} "${kwE}"${foundPages>0?` · ${foundPages} ${L.pagesFound}`:''} · ✅ ${source}`:`${L.notRanking} "${kwE}" · ⚠️ ${L.estimation}`)} · ${L.top3Target}: +${g} ${L.visitorsMonth}</div>
 <div class="dt">${L.avgOrder}: ${sd.o} ${cur} ${unit} <span class="info" style="display:inline-flex;vertical-align:middle">ℹ️<span class="i">i</span><span class="bubble">${L.avgOrderTip}</span></span> · ${L.conversion}: ${conv}% · ${L.about} ${(sd.t/1000).toFixed(1)}K ${L.searchesMonth}</div>
 </div>
 <div id="peekLine" class="peek scorecard" style="display:none"></div>
@@ -925,7 +925,7 @@ if(window.__prefillCode){var _uc=document.getElementById('unlockCode');if(_uc&&!
 window.__render=render;
 
 // Optimistic UI: show the instant sector estimate first, then swap in the real Google position
-render(estPos(u, sectorKey), false, 'estimation', 0);
+render(estPos(u, sectorKey), false, 'estimation', 0, true);
 fetchPeek();
 document.getElementById('result').scrollIntoView({behavior:'smooth'});
 document.getElementById('calcBtn').disabled=true;
@@ -938,6 +938,7 @@ try {
     clearTimeout(t);
     const d = await r.json();
     if (d.found && d.position) render(d.position, true, '✅ Google', d.count || 0);
+    else render(estPos(u, sectorKey), false, 'estimation', 0, false);
     const fr=curLang==='fr';
     if (d.already_top){
       // #1: no one outranks you — congratulate instead of listing competitors.
@@ -951,7 +952,7 @@ try {
       +'<div class="sc-foot">'+(fr?'Le rapport complet analyse ce que ces pages font mieux — et votre plan pour les dépasser.':'The full report breaks down what these pages do better — and your plan to overtake them.')+'</div>';
       applyComp();
     }
-} catch(e) { console.log('Search API unavailable, keeping estimate'); }
+} catch(e) { console.log('Search API unavailable, keeping estimate'); render(estPos(u, sectorKey), false, 'estimation', 0, false); }
 
 document.getElementById('calcBtn').disabled=false;
 document.getElementById('calcBtn').textContent=document.getElementById('calcBtn').getAttribute('data-'+curLang);
