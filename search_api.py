@@ -907,25 +907,44 @@ def search_google(query, site_url, market='global', depth=10):
     if data.get('tasks') and data['tasks'][0].get('result'):
         items = data['tasks'][0]['result'][0].get('items', [])
 
-    positions = []
-    first_url = None
-    competitors = []
-    for i, item in enumerate(items):
-        d = (item.get('domain') or '').lower()
+    # Use the REAL organic rank (rank_group) — NOT the raw item index, which counts ads / maps /
+    # featured snippets. organic = list of (rank, domain_without_www, url), sorted by rank.
+    organic = []
+    for item in items:
+        if item.get('type') != 'organic':
+            continue
+        rank = item.get('rank_group') or item.get('rank_absolute')
+        if not rank:
+            continue
+        d = re.sub(r'^www\.', '', (item.get('domain') or '').lower())
         u = (item.get('url') or item.get('link') or '')
-        if domain in d or domain in u:
-            positions.append(i + 1)
-            if not first_url: first_url = u
-        else:
-            cd = re.sub(r'^www\.', '', d)
-            if cd and cd not in competitors:
-                competitors.append(cd)
-    competitors = competitors[:5]
+        organic.append((rank, d, u))
+    organic.sort(key=lambda t: t[0])
 
-    if positions:
-        result = {'position': min(positions), 'found': True, 'count': len(positions), 'url': first_url, 'competitors': competitors, 'source': 'Google (DataForSEO)', 'cost': data.get('cost', 0)}
+    site_ranks = [r for (r, d, u) in organic if domain in d or domain in u]
+    site_url = next((u for (r, d, u) in organic if domain in d or domain in u), None)
+
+    def _dedup_top5(seq):
+        out = []
+        for dm in seq:
+            if dm and dm not in out:
+                out.append(dm)
+        return out[:5]
+
+    if site_ranks:
+        pos = min(site_ranks)
+        # Competitors = ONLY the sites that actually outrank you (organic rank strictly above), max 5.
+        # #1 -> none (already top). #4 -> the 3 above. #9 -> the top 5 above.
+        competitors = _dedup_top5(d for (r, d, u) in organic if r < pos and domain not in d)
+        result = {'position': pos, 'found': True, 'count': len(site_ranks), 'url': site_url,
+                  'competitors': competitors, 'already_top': pos == 1,
+                  'source': 'Google (DataForSEO)', 'cost': data.get('cost', 0)}
     else:
-        result = {'position': None, 'found': False, 'url': None, 'competitors': competitors, 'source': 'Google (DataForSEO)', 'cost': data.get('cost', 0)}
+        # Not ranking in the retrieved results — everyone outranks an unranked site: top 5 organic.
+        competitors = _dedup_top5(d for (r, d, u) in organic)
+        result = {'position': None, 'found': False, 'url': None,
+                  'competitors': competitors, 'already_top': False,
+                  'source': 'Google (DataForSEO)', 'cost': data.get('cost', 0)}
 
     # Store + purge expired entries (bounded memory, like request_log)
     search_cache[cache_key] = {'result': result, 'ts': now}

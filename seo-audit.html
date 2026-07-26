@@ -938,10 +938,15 @@ try {
     clearTimeout(t);
     const d = await r.json();
     if (d.found && d.position) render(d.position, true, '✅ Google', d.count || 0);
-    if (d.competitors && d.competitors.length){
+    const fr=curLang==='fr';
+    if (d.already_top){
+      // #1: no one outranks you — congratulate instead of listing competitors.
+      window.__compHTML='<div class="sc-head"><strong>'+(fr?'🎉 Vous êtes déjà #1 sur Google':'🎉 You already rank #1 on Google')+'</strong></div>'
+      +'<div class="sc-foot">'+(fr?'Votre page est déjà bien optimisée pour ce mot-clé — gardez le cap. Le rapport complet montre comment défendre la 1ʳᵉ place et capter d\'autres mots-clés porteurs.':'Your page is already well optimized for this keyword — keep the momentum. The full report shows how to defend the #1 spot and capture more high-value keywords.')+'</div>';
+      applyComp();
+    } else if (d.competitors && d.competitors.length){
       window.__competitors=d.competitors;
-      const fr=curLang==='fr';
-      window.__compHTML='<div class="sc-head"><strong>'+(fr?'🏆 Qui vous devance sur Google (Top 10)':'🏆 Who outranks you on Google (Top 10)')+'</strong></div>'
+      window.__compHTML='<div class="sc-head"><strong>'+(fr?'🏆 Qui vous devance sur Google':'🏆 Who outranks you on Google')+'</strong></div>'
       +'<div class="comp-list">'+d.competitors.map(function(c,i){return '<span class="comp-chip">#'+(i+1)+' '+esc(c)+'</span>';}).join('')+'</div>'
       +'<div class="sc-foot">'+(fr?'Le rapport complet analyse ce que ces pages font mieux — et votre plan pour les dépasser.':'The full report breaks down what these pages do better — and your plan to overtake them.')+'</div>';
       applyComp();
