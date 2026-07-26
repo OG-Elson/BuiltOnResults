@@ -594,6 +594,7 @@ resSectors:{restaurant:'🍽️ Restaurant',hotel:'🏨 Hotel',ecommerce:'🛒 E
 resMarkets:{global:'🌍 Global',eu:'🇪🇺 Europe',us:'🇺🇸 N. America',africa:'🌍 Africa',asia:'🌏 Asia'},
 potentialRevenue:'Potential monthly revenue',perMonth:'/month',rank:'Rank',forKw:'for',notRanking:'Not in Google\'s Top 10 for',pagesFound:'pages found',estimation:'estimate',top3Target:'Potential at #1',visitorsMonth:'visitors/month',avgOrder:'Average order',perNight:'/night',perSale:'/sale',perOrder:'/order',avgOrderTip:'Average amount a customer spends per purchase or booking. E.g. a restaurant = $20/meal, a hotel = $120/night.',conversion:'Conversion',about:'About',searchesMonth:'searches/month',howCalc:'How is this number calculated?',estNote:'These figures are estimates from sector averages (search volume, order value, conversion) — your real numbers may differ. A full audit tunes them to your business.',
 explain1:(p,kw,tr)=>`Right now you rank <strong>#${p}</strong> for "${kw}". At this position, Google sends you about <strong>${tr} visitors/month</strong>.`,
+explain1NotRanked:(kw,t3)=>`You're <strong>not ranking in the Top 10</strong> for "${kw}" — likely on page 2+, so this keyword sends you close to <strong>0 visitors/month</strong> today. At <strong>#1</strong> you'd get about <strong>${t3} visitors/month</strong>.`,
 explain2:(t3,g)=>`If you reached the <strong>#1 spot</strong>, you'd get about <strong>${t3} visitors/month</strong> — that's <strong>${g} extra visitors</strong>.`,
 explain3:(o,cur,conv)=>`With an average order of <strong>${o} ${cur}</strong> and a <strong>${conv}%</strong> conversion rate:`,
 visitors:'visitors',extraRevMonth:'of extra revenue per month',actionPlan:'Free action plan — first steps to rank in the Top 3',customPlan:'Custom action plan + 15-min strategy call',toGoThrough:'to go through your results and set priorities —',inAudit:'in the complete $15 audit',bookBtn:'Get Full Audit ($15)',resetBtn:'← Reset',pdfBtn:'🖨️ PDF',
@@ -605,6 +606,7 @@ resSectors:{restaurant:'🍽️ Restaurant',hotel:'🏨 Hôtel',ecommerce:'🛒 
 resMarkets:{global:'🌍 Global',eu:'🇪🇺 Europe',us:'🇺🇸 Am. Nord',africa:'🌍 Afrique',asia:'🌏 Asie'},
 potentialRevenue:'Revenu mensuel potentiel',perMonth:'/mois',rank:'Rang',forKw:'sur',notRanking:'Pas dans le Top 10 Google pour',pagesFound:'pages trouvées',estimation:'estimation',top3Target:'Potentiel en #1',visitorsMonth:'visiteurs/mois',avgOrder:'Panier moyen',perNight:'/nuit',perSale:'/vente',perOrder:'/commande',avgOrderTip:'Montant moyen dépensé par un client à chaque achat ou réservation. Ex : un resto = 20€/repas, un hôtel = 120€/nuit.',conversion:'Conversion',about:'Environ',searchesMonth:'recherches/mois',howCalc:'Comment ce chiffre est-il calculé ?',estNote:'Ces chiffres sont des estimations basées sur des moyennes secteur (volume, panier, conversion) — tes vrais chiffres peuvent varier. Un audit complet les ajuste à ton activité.',
 explain1:(p,kw,tr)=>`Actuellement tu es <strong>#${p}</strong> sur "${kw}". À cette position, Google t'envoie environ <strong>${tr} visiteurs/mois</strong>.`,
+explain1NotRanked:(kw,t3)=>`Tu n'es <strong>pas classé dans le Top 10</strong> pour "${kw}" — probablement en page 2+, donc ce mot-clé t'amène quasi <strong>0 visiteur/mois</strong> aujourd'hui. En <strong>#1</strong> tu aurais environ <strong>${t3} visiteurs/mois</strong>.`,
 explain2:(t3,g)=>`Si tu atteignais la <strong>1ʳᵉ place</strong>, tu passerais à environ <strong>${t3} visiteurs/mois</strong> — soit <strong>${g} visiteurs en plus</strong>.`,
 explain3:(o,cur,conv)=>`Avec un panier moyen de <strong>${o} ${cur}</strong> et un taux de conversion de <strong>${conv}%</strong> :`,
 visitors:'visiteurs',extraRevMonth:'de revenu supplémentaire par mois',actionPlan:"Plan d'action gratuit — premiers pas pour être classé dans le Top 3",customPlan:"Plan d'action personnalisé + appel stratégie 15 min",toGoThrough:'pour parcourir tes résultats et définir les priorités —',inAudit:"dans l'audit complet à 15$",bookBtn:"Obtenir l'audit complet (15$)",resetBtn:'← Réinitialiser',pdfBtn:'🖨️ PDF',
@@ -863,7 +865,7 @@ const md=mkt[marketKey];
 const sd=md[sectorKey];
 const sectorName=L.resSectors[sectorKey];
 const p=position;
-const tr=Math.round(sd.t*(ctr[p]||.01)),t3=Math.round(sd.t*ctr[1]),g=Math.max(0,t3-tr);
+const tr=realPosition?Math.round(sd.t*(ctr[p]||.01)):0,t3=Math.round(sd.t*ctr[1]),g=Math.max(0,t3-tr);
 const m=Math.round(g*sd.c*sd.o),y=m*12,cur=md.sym;
 const conv=Math.round(sd.c*100);
 const unit=sectorKey==='hotel'?L.perNight:sectorKey==='immobilier'?L.perSale:L.perOrder;
@@ -884,7 +886,7 @@ document.getElementById('result').innerHTML=`
 <div id="compLine" class="peek compbox" style="display:none"></div>
 <div class="br">
 <strong>📊 ${L.howCalc}</strong><br>
-${L.explain1(p,kwE,tr)}<br><br>
+${realPosition?L.explain1(p,kwE,tr):L.explain1NotRanked(kwE,t3)}<br><br>
 ${L.explain2(t3,g)}<br><br>
 ${L.explain3(sd.o,cur,conv)}<br>
 👉 <strong>${g} ${L.visitors} × ${conv}% × ${sd.o} ${cur} = ${m} ${cur} ${L.extraRevMonth}</strong><br><br><span style="font-size:.82em;opacity:.7">ℹ️ ${L.estNote}</span>
