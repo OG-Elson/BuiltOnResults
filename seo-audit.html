@@ -878,7 +878,7 @@ document.getElementById('result').innerHTML=`
 <div class="lb">${L.potentialRevenue} — <strong>${cur}</strong></div>
 <div class="bg">${m>0?'+'+m:'0'} ${cur}<span style="font-size:1.1rem;font-weight:400;opacity:.7"> ${L.perMonth}</span></div>
 <div class="sb">${loading?`⏳ ${curLang==='fr'?'Vérification de votre position Google…':'Checking your live Google ranking…'}`:(realPosition?`${L.rank} #${p} ${L.forKw} "${kwE}"${foundPages>0?` · ${foundPages} ${L.pagesFound}`:''} · ✅ ${source}`:`${L.notRanking} "${kwE}" · ⚠️ ${L.estimation}`)} · ${L.top3Target}: +${g} ${L.visitorsMonth}</div>
-<div class="dt">${L.avgOrder}: ${sd.o} ${cur} ${unit} <span class="info" style="display:inline-flex;vertical-align:middle">ℹ️<span class="i">i</span><span class="bubble">${L.avgOrderTip}</span></span> · ${L.conversion}: ${conv}% · ${L.about} ${(sd.t/1000).toFixed(1)}K ${L.searchesMonth}</div>
+<div class="dt">${L.avgOrder}: ${sd.o} ${cur} ${unit} <span class="info" style="display:inline-flex;vertical-align:middle">ℹ️<span class="i">i</span><span class="bubble">${L.avgOrderTip}</span></span> · ${L.conversion}: ${conv}% · ${L.about} ${(sd.t/1000).toFixed(1)}K ${L.searchesMonth} (${curLang==='fr'?'moyenne secteur':'sector avg'})</div>
 </div>
 <div id="peekLine" class="peek scorecard" style="display:none"></div>
 <div id="compLine" class="peek compbox" style="display:none"></div>
