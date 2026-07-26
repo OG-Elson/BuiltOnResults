@@ -933,7 +933,7 @@ document.getElementById('calcBtn').textContent=I18N[curLang].checking;
 
 try {
     const c = new AbortController();
-    const t = setTimeout(() => c.abort(), 3000);
+    const t = setTimeout(() => c.abort(), 12000);
     const r = await fetch(`/flyer/api/search?q=${encodeURIComponent(kw)}&site=${encodeURIComponent(u)}&m=${marketKey}`, { signal: c.signal });
     clearTimeout(t);
     const d = await r.json();
