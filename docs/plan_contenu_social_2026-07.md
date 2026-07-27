@@ -25,7 +25,18 @@ Oui → publie. Non → bruit qui dilue.
 | Posts texte | liaison | leçons courtes, prises de position |
 
 **Faceless pour commencer** : screen recordings + texte à l'écran + son trending. Voix off
-optionnelle (pas de face cam). Anglais.
+optionnelle (pas de face cam).
+
+## Langue — anglais d'abord (décidé 2026-07-27)
+
+- **Master = anglais.** Cible primaire = anglophone, cohérent avec « based in Kenya, delivered
+  worldwide » (pool d'audience plus large, meilleur signal algo, focus sur une cible).
+- **Les reels faceless sont déjà quasi agnostiques** (écran + texte anglais + son, peu de parole) :
+  un francophone suit largement les visuels sans traduction.
+- **Accessibilité FR = couche de repurposing peu coûteuse, ajoutée plus tard, PAS un effort
+  parallèle** : sous-titres FR auto (CapCut) depuis le master · doublage IA (ElevenLabs/HeyGen) si
+  voix off · **un seul compte anglophone** pour commencer (pas de 2e compte FR sans traction).
+- Règle : **l'anglais est la stratégie, le FR est opportuniste.**
 
 ## 3 piliers
 
