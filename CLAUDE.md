@@ -5,6 +5,8 @@
 > Tu (Claude Code) démarres une session dédiée à **BuiltOnResults** (dossier de travail `/home/deploy/builtonresults/`, mémoire vierge — c'est voulu, pour ne PAS mélanger avec Chef Angela). **Lis ce fichier en entier avant d'agir.**
 > Note : jusqu'à mi-07/2026 le travail BuiltOnResults tournait sous le projet `-var-www-chef-angela` (cwd mélangé) — d'où ce fichier pour repartir propre.
 
+> 🗣️ **Langue de communication (décidé 2026-08-05)** : communiquer avec OG-Elson **en ANGLAIS**. Il bascule progressivement toute son opération en anglais (prépa environnement anglophone + cohérence avec le contenu build-in-public anglais-master, filmé à l'écran). Les réponses en direct sont en anglais ; le channel inter-agents et les docs internes restent bilingues/FR pour l'instant (bascule graduelle, priorité aux surfaces filmées).
+
 ---
 
 ## 1. Le projet
