@@ -18,7 +18,7 @@
 - ⚠️ **nginx = exact match `= /api/search`** → TOUS les endpoints passent par ce path + `?fn=<name>`. Ajouter un nouveau path `/api/xxx` = modif nginx root (**sudo OG-Elson**).
 - **Deploy** : source `/home/deploy/builtonresults/*` →
   - **preview** `/var/www/flyer-gigs/out/` (garde les chemins `/flyer/`)
-  - **prod** `/var/www/flyer-gigs/builtonresults-prod/` (via `sed` : `/flyer/api/search`→`/api/search` · `/flyer/seo-audit-preview.html`→`/audit` · `/flyer/consultation.html`→`/consultation` · `/flyer/insights/`→`/insights/` · `/flyer/images/`→`/images/` · `builtonresults.com`→`builtonresults.co.ke`)
+  - **prod** `/var/www/builtonresults/` (corrected 2026-11-22; the old `/var/www/flyer-gigs/builtonresults-prod/` no longer exists). Build with `./deploy.sh <DEST>` (whitelist, default DEST = `.deploy-staging/`), diff, then sync to prod. Transformations applied by deploy.sh (`sed` : `/flyer/api/search`→`/api/search` · `/flyer/seo-audit-preview.html`→`/audit` · `/flyer/consultation.html`→`/consultation` · `/flyer/insights/`→`/insights/` · `/flyer/images/`→`/images/` · `builtonresults.com`→`builtonresults.co.ke`)
 - **Restart daemon** (JAMAIS `pkill` — a tué le shell) :
   ```bash
   PID=$(ss -ltnp 2>/dev/null | grep ':8083' | grep -oP 'pid=\K[0-9]+' | head -1); [ -n "$PID" ] && kill $PID; sleep 1
@@ -42,6 +42,7 @@
 - **Étape 3 — Autorité & backlinks** 🔄 EN COURS : tracker + copy kit dans le vault. **Blockers** : pas d'adresse Kenya (Tier 1 annuaires bloqués), backlink dofollow payant, track record vide. → pivot **prospection outbound + showcase templates**.
 
 ## 5. Travail actif / prochaines étapes
+- 🔄 **PIVOT Nov 2026 (current priority)**: agent/platform-per-niche model + social promotion, value-first **Chef Angela story series** (8 episodes; Ep1 live 2026-11-20, Ep2 2026-11-22). Read first: the banner at the top of `vault/projects/builtonresults/handoff.md`, then `pivot_agent_model_framework_2026-11.md`, `social_launch_sprint_2026-11.md` (§6b Meta posting pipeline), `angela_story_series_2026-11.md`. Reels + posting tool: `/home/deploy/vault-media/builtonresults/reels/` (`publish.py`, nothing posted without OG-Elson's explicit "post"). The cleaning outreach below is the July track (on hold since the pivot unless OG-Elson resumes it).
 - **Outreach prospects cleaning (Mombasa)** — ⚠️ **LANCÉ le 2026-07-20** (Batch 1 envoyé, 1er lead chaud **Kejani/Kevin**). État vivant : `vault/projects/builtonresults/handoff.md` + Sheet `Taches`. Prochain : **volume sur toute la liste (25)** + **case study Angela chiffrée** + **fluidifier réponse→closing**. Point encore à durcir = **l'OFFRE** (track-record-first, prix cassé 3 premiers, inversion du risque — skill `marketeur`). **Goulot = acquisition**, pas conversion. CSV : `vault/projects/builtonresults/prospects_cote_mombasa.csv`.
 - **Showcase templates autres secteurs** (légal, dental) : réutiliser le pattern de `cleaning-mombasa.html`. Sources design : Hermes (brief dans `refs/inspiration/`), headless Chrome, ou codedesign.ai (**réservé aux vrais clients**, 2 gens restantes).
 - **Pipeline screenshots** (ma vision) : OG-Elson dépose des images dans `/home/deploy/agent-comms/screenshots/` → je les lis (Read rend les PNG/JPG).
